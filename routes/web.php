@@ -36,6 +36,14 @@ Route::view('/contacts', 'pages.contact.index')->name('contact.index');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
+    Route::prefix('admin')->group(function () {
+
+    Route::get('/login', [AuthController::class, 'showLogin'])
+        ->name('admin.login');
+
+    Route::post('/login', [AuthController::class, 'login'])
+        ->name('admin.login.submit');
+
     Route::view('/', 'admin.dashboard')->name('dashboard');
 
     Route::prefix('services')->name('services.')->group(function () {
