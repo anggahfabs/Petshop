@@ -9,7 +9,7 @@
 </head>
 <body class="min-h-screen flex">
 
-    {{-- Sidebar --}}
+    @auth
     <aside class="w-64 border-r px-4 py-6">
         <strong>Admin Panel</strong>
 
@@ -24,11 +24,12 @@
             </ul>
         </nav>
     </aside>
+    @endauth
 
-    {{-- Content --}}
     <main class="flex-1 px-8 py-6">
         @yield('content')
     </main>
 
 </body>
+
 </html>

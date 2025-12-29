@@ -1,6 +1,7 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\Admin\AuthController;
 
 /*
 |--------------------------------------------------------------------------
@@ -36,34 +37,49 @@ Route::view('/contacts', 'pages.contact.index')->name('contact.index');
 
 Route::prefix('admin')->name('admin.')->group(function () {
 
-    Route::prefix('admin')->group(function () {
-
+    /*
+    |-------------------------
+    | Admin Auth (Guest only)
+    |-------------------------
+    */
     Route::get('/login', [AuthController::class, 'showLogin'])
-        ->name('admin.login');
+        ->name('login');
 
     Route::post('/login', [AuthController::class, 'login'])
-        ->name('admin.login.submit');
+        ->name('login.submit');
 
-    Route::view('/', 'admin.dashboard')->name('dashboard');
+    /*
+    |-------------------------
+    | Admin Area (Auth only)
+    |-------------------------
+    */
+    Route::middleware('auth')->group(function () {
 
-    Route::prefix('services')->name('services.')->group(function () {
-        Route::view('/', 'admin.services.index')->name('index');
+        Route::post('/logout', [AuthController::class, 'logout'])
+            ->name('logout');
+
+        Route::view('/', 'admin.dashboard')
+            ->name('dashboard');
+
+        Route::prefix('services')->name('services.')->group(function () {
+            Route::view('/', 'admin.services.index')->name('index');
+        });
+
+        Route::prefix('products')->name('products.')->group(function () {
+            Route::view('/', 'admin.products.index')->name('index');
+        });
+
+        Route::prefix('articles')->name('articles.')->group(function () {
+            Route::view('/', 'admin.articles.index')->name('index');
+        });
+
+        Route::prefix('gallery')->name('gallery.')->group(function () {
+            Route::view('/', 'admin.gallery.index')->name('index');
+        });
+
+        Route::prefix('appointments')->name('appointments.')->group(function () {
+            Route::view('/', 'admin.appointments.index')->name('index');
+        });
+
     });
-
-    Route::prefix('products')->name('products.')->group(function () {
-        Route::view('/', 'admin.products.index')->name('index');
-    });
-
-    Route::prefix('articles')->name('articles.')->group(function () {
-        Route::view('/', 'admin.articles.index')->name('index');
-    });
-
-    Route::prefix('gallery')->name('gallery.')->group(function () {
-        Route::view('/', 'admin.gallery.index')->name('index');
-    });
-
-    Route::prefix('appointments')->name('appointments.')->group(function () {
-        Route::view('/', 'admin.appointments.index')->name('index');
-    });
-
 });
