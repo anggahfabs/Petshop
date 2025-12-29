@@ -38,6 +38,13 @@
         >
             Login
         </button>
+
+        <a href="{{ route('admin.password.request') }}">
+    Forgot password?
+</a>
+<a href="{{ route('admin.register') }}">Create new account</a>
+
+
     </form>
 
 </div>

@@ -2,6 +2,7 @@
 
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\Admin\AuthController;
+use App\Http\Controllers\Admin\PasswordResetController;
 
 /*
 |--------------------------------------------------------------------------
@@ -27,7 +28,7 @@ Route::prefix('articles')->name('articles.')->group(function () {
 });
 
 Route::view('/gallery', 'pages.gallery.index')->name('gallery.index');
-Route::view('/contacts', 'pages.contact.index')->name('contact.index');
+Route::view('/contact', 'pages.contact.index')->name('contact.index');
 
 /*
 |--------------------------------------------------------------------------
@@ -39,7 +40,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
 
     /*
     |-------------------------
-    | Admin Auth (Guest only)
+    | Admin Auth (Guest)
     |-------------------------
     */
     Route::get('/login', [AuthController::class, 'showLogin'])
@@ -48,9 +49,28 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::post('/login', [AuthController::class, 'login'])
         ->name('login.submit');
 
+    Route::get('/forgot-password', [PasswordResetController::class, 'request'])
+        ->name('password.request');
+
+    Route::post('/forgot-password', [PasswordResetController::class, 'email'])
+        ->name('password.email');
+
+    Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset'])
+        ->name('password.reset');
+
+    Route::post('/reset-password', [PasswordResetController::class, 'update'])
+        ->name('password.update');
+
+    Route::get('/register', [AuthController::class, 'showRegister'])
+    ->name('register');
+
+Route::post('/register', [AuthController::class, 'register'])
+    ->name('register.submit');
+
+
     /*
     |-------------------------
-    | Admin Area (Auth only)
+    | Admin Area (Auth)
     |-------------------------
     */
     Route::middleware('auth')->group(function () {
@@ -80,6 +100,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::prefix('appointments')->name('appointments.')->group(function () {
             Route::view('/', 'admin.appointments.index')->name('index');
         });
-
     });
+
+    
 });

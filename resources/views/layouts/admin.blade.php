@@ -12,6 +12,10 @@
     @auth
     <aside class="w-64 border-r px-4 py-6">
         <strong>Admin Panel</strong>
+        <form method="POST" action="{{ route('admin.logout') }}" class="mt-6">
+    @csrf
+    <button type="submit">Logout</button>
+</form>
 
         <nav class="mt-6">
             <ul class="space-y-2">
