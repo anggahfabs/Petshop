@@ -1,22 +1,184 @@
 @extends('layouts.admin')
 
-@section('title', 'Products')
-
 @section('content')
-<h1 class="text-2xl font-bold mb-4">Products</h1>
+<div
+    x-data="{
+        openCreate: false,
+        openEdit: false,
+        baseUrl: '{{ route('admin.products.index') }}',
+        editData: {
+            id: null,
+            name: '',
+            slug: '',
+            description: '',
+            price: 0,
+            is_active: true,
+        }
+    }"
+>
 
-<a href="#">Create New Products</a>
+    {{-- HEADER --}}
+    <div class="flex justify-between items-center mb-4">
+        <h1 class="text-xl font-semibold">Products</h1>
+        <button
+            @click="openCreate = true"
+            class="px-4 py-2 bg-black text-white rounded"
+        >
+            Tambah Product
+        </button>
+    </div>
 
-<table class="mt-4 w-full border">
-    <thead>
-        <tr>
-            <th>Title</th>
-            <th>Published</th>
-            <th>Actions</th>
-        </tr>
-    </thead>
-    <tbody>
-        {{-- loop data nanti --}}
-    </tbody>
-</table>
+    {{-- TABLE --}}
+    <table class="w-full border text-sm">
+        <thead class="bg-gray-100">
+            <tr>
+                <th class="p-2 text-left">Name</th>
+                <th class="p-2">Slug</th>
+                <th class="p-2">Price</th>
+                <th class="p-2">Description</th>
+                <th class="p-2">Image</th>
+                <th class="p-2">Active</th>
+                <th class="p-2">Aksi</th>
+            </tr>
+        </thead>
+        <tbody>
+            @forelse($products as $product)
+            <tr class="border-t">
+                <td class="p-2">{{ $product->name }}</td>
+                <td class="p-2">{{ $product->slug }}</td>
+                <td class="p-2">
+                    Rp {{ number_format($product->price, 0, ',', '.') }}
+                </td>
+                <td class="p-2">{{ $product->description }}</td>
+                <td class="p-2 text-center">
+                    @if($product->image)
+                        <img
+                            src="{{ asset('storage/'.$product->image) }}"
+                            class="h-10 mx-auto"
+                        >
+                    @endif
+                </td>
+                <td class="p-2 text-center">
+                    {{ $product->is_active ? 'Yes' : 'No' }}
+                </td>
+                <td class="p-2 text-center space-x-2">
+                    <button
+                        class="underline"
+                        @click="
+                            openEdit = true;
+                            editData = {
+                                id: {{ $product->id }},
+                                name: '{{ $product->name }}',
+                                slug: '{{ $product->slug }}',
+                                description: @js($product->description),
+                                price: {{ $product->price }},
+                                is_active: {{ $product->is_active ? 'true' : 'false' }}
+                            }
+                        "
+                    >
+                        Edit
+                    </button>
+
+                    <form
+                        action="{{ route('admin.products.destroy', $product) }}"
+                        method="POST"
+                        class="inline"
+                        onsubmit="return confirm('Hapus product?')"
+                    >
+                        @csrf
+                        @method('DELETE')
+                        <button class="underline text-red-600">Delete</button>
+                    </form>
+                </td>
+            </tr>
+            @empty
+            <tr>
+                <td colspan="7" class="p-4 text-center text-gray-500">
+                    Belum ada data
+                </td>
+            </tr>
+            @endforelse
+        </tbody>
+    </table>
+
+    {{-- CREATE MODAL --}}
+    <div
+        x-show="openCreate"
+        x-cloak
+        class="fixed inset-0 bg-black/50 flex items-center justify-center"
+    >
+        <div class="bg-white w-full max-w-lg p-6">
+            <h2 class="text-lg font-semibold mb-4">Tambah Product</h2>
+
+            <form
+                action="{{ route('admin.products.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="space-y-3"
+            >
+                @csrf
+
+                <input name="name" placeholder="Name" class="w-full border p-2" required>
+                <input name="slug" placeholder="Slug" class="w-full border p-2" required>
+                <input name="price" type="number" min="0" step="0.01" placeholder="Price" class="w-full border p-2" required>
+
+                <textarea name="description" placeholder="Description" class="w-full border p-2"></textarea>
+
+                <input type="file" name="image">
+
+                <label class="flex items-center gap-2">
+                    <input type="hidden" name="is_active" value="0">
+                    <input type="checkbox" name="is_active" value="1" checked>
+                    Active
+                </label>
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" @click="openCreate=false">Batal</button>
+                    <button class="px-4 py-2 bg-black text-white">Simpan</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+    {{-- EDIT MODAL --}}
+    <div
+        x-show="openEdit"
+        x-cloak
+        class="fixed inset-0 bg-black/50 flex items-center justify-center"
+    >
+        <div class="bg-white w-full max-w-lg p-6">
+            <h2 class="text-lg font-semibold mb-4">Edit Product</h2>
+
+            <form
+                :action="`${baseUrl}/${editData.id}`"
+                method="POST"
+                enctype="multipart/form-data"
+                class="space-y-3"
+            >
+                @csrf
+                @method('PUT')
+
+                <input name="name" x-model="editData.name" class="w-full border p-2" required>
+                <input name="slug" x-model="editData.slug" class="w-full border p-2" required>
+                <input name="price" type="number" min="0" step="0.01" x-model="editData.price" class="w-full border p-2" required>
+
+                <textarea name="description" x-model="editData.description" class="w-full border p-2"></textarea>
+
+                <input type="file" name="image">
+
+                <label class="flex items-center gap-2">
+                    <input type="hidden" name="is_active" value="0">
+                    <input type="checkbox" name="is_active" value="1" :checked="editData.is_active">
+                    Active
+                </label>
+
+                <div class="flex justify-end gap-2">
+                    <button type="button" @click="openEdit=false">Batal</button>
+                    <button class="px-4 py-2 bg-black text-white">Update</button>
+                </div>
+            </form>
+        </div>
+    </div>
+
+</div>
 @endsection

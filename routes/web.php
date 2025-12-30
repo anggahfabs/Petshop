@@ -6,6 +6,7 @@ use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PasswordResetController;
 use App\Http\Controllers\Admin\HeroController;
 use App\Http\Controllers\Admin\ServiceController;
+use App\Http\Controllers\Admin\ProductController;
 
 /*
 |--------------------------------------------------------------------------
@@ -96,6 +97,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
         */
         Route::resource('heroes', HeroController::class);
         Route::resource('services', ServiceController::class);
+        Route::resource('products', ProductController::class);
 
         /*
         |-------------------------
@@ -106,9 +108,9 @@ Route::prefix('admin')->name('admin.')->group(function () {
         //     Route::view('/', 'admin.services.index')->name('index');
         // });
 
-        Route::prefix('products')->name('products.')->group(function () {
-            Route::view('/', 'admin.products.index')->name('index');
-        });
+        // Route::prefix('products')->name('products.')->group(function () {
+        //     Route::view('/', 'admin.products.index')->name('index');
+        // });
 
         Route::prefix('articles')->name('articles.')->group(function () {
             Route::view('/', 'admin.articles.index')->name('index');
