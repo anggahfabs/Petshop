@@ -20,6 +20,7 @@
         <nav class="mt-6">
             <ul class="space-y-2">
                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
+                <li><a href="{{ route('admin.heroes.index') }}">Heroes</a></li>
                 <li><a href="{{ route('admin.services.index') }}">Services</a></li>
                 <li><a href="{{ route('admin.products.index') }}">Products</a></li>
                 <li><a href="{{ route('admin.articles.index') }}">Articles</a></li>

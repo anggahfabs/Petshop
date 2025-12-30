@@ -1,8 +1,11 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\HomeController;
 use App\Http\Controllers\Admin\AuthController;
 use App\Http\Controllers\Admin\PasswordResetController;
+use App\Http\Controllers\Admin\HeroController;
+use App\Http\Controllers\Admin\ServiceController;
 
 /*
 |--------------------------------------------------------------------------
@@ -10,7 +13,7 @@ use App\Http\Controllers\Admin\PasswordResetController;
 |--------------------------------------------------------------------------
 */
 
-Route::view('/', 'pages.home')->name('home');
+Route::get('/', [HomeController::class, 'index'])->name('home');
 
 Route::prefix('services')->name('services.')->group(function () {
     Route::view('/', 'pages.services.index')->name('index');
@@ -30,6 +33,8 @@ Route::prefix('articles')->name('articles.')->group(function () {
 Route::view('/gallery', 'pages.gallery.index')->name('gallery.index');
 Route::view('/contact', 'pages.contact.index')->name('contact.index');
 
+
+
 /*
 |--------------------------------------------------------------------------
 | Admin Routes
@@ -43,30 +48,32 @@ Route::prefix('admin')->name('admin.')->group(function () {
     | Admin Auth (Guest)
     |-------------------------
     */
-    Route::get('/login', [AuthController::class, 'showLogin'])
-        ->name('login');
+    Route::middleware('guest')->group(function () {
 
-    Route::post('/login', [AuthController::class, 'login'])
-        ->name('login.submit');
+        Route::get('/login', [AuthController::class, 'showLogin'])
+            ->name('login');
 
-    Route::get('/forgot-password', [PasswordResetController::class, 'request'])
-        ->name('password.request');
+        Route::post('/login', [AuthController::class, 'login'])
+            ->name('login.submit');
 
-    Route::post('/forgot-password', [PasswordResetController::class, 'email'])
-        ->name('password.email');
+        Route::get('/register', [AuthController::class, 'showRegister'])
+            ->name('register');
 
-    Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset'])
-        ->name('password.reset');
+        Route::post('/register', [AuthController::class, 'register'])
+            ->name('register.submit');
 
-    Route::post('/reset-password', [PasswordResetController::class, 'update'])
-        ->name('password.update');
+        Route::get('/forgot-password', [PasswordResetController::class, 'request'])
+            ->name('password.request');
 
-    Route::get('/register', [AuthController::class, 'showRegister'])
-    ->name('register');
+        Route::post('/forgot-password', [PasswordResetController::class, 'email'])
+            ->name('password.email');
 
-Route::post('/register', [AuthController::class, 'register'])
-    ->name('register.submit');
+        Route::get('/reset-password/{token}', [PasswordResetController::class, 'reset'])
+            ->name('password.reset');
 
+        Route::post('/reset-password', [PasswordResetController::class, 'update'])
+            ->name('password.update');
+    });
 
     /*
     |-------------------------
@@ -78,12 +85,26 @@ Route::post('/register', [AuthController::class, 'register'])
         Route::post('/logout', [AuthController::class, 'logout'])
             ->name('logout');
 
-        Route::view('/', 'admin.dashboard')
-            ->name('dashboard');
+        Route::get('/', function () {
+            return view('admin.dashboard');
+        })->name('dashboard');
 
-        Route::prefix('services')->name('services.')->group(function () {
-            Route::view('/', 'admin.services.index')->name('index');
-        });
+        /*
+        |-------------------------
+        | HERO CRUD (ADMIN)
+        |-------------------------
+        */
+        Route::resource('heroes', HeroController::class);
+        Route::resource('services', ServiceController::class);
+
+        /*
+        |-------------------------
+        | Placeholder Admin Pages
+        |-------------------------
+        */
+        // Route::prefix('services')->name('services.')->group(function () {
+        //     Route::view('/', 'admin.services.index')->name('index');
+        // });
 
         Route::prefix('products')->name('products.')->group(function () {
             Route::view('/', 'admin.products.index')->name('index');
@@ -101,6 +122,4 @@ Route::post('/register', [AuthController::class, 'register'])
             Route::view('/', 'admin.appointments.index')->name('index');
         });
     });
-
-    
 });

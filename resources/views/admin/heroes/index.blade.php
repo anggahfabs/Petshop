@@ -5,12 +5,13 @@
     x-data="{
         openCreate: false,
         openEdit: false,
-        baseUrl: '{{ route('admin.services.index') }}',
+        baseUrl: '{{ route('admin.heroes.index') }}',
         editData: {
             id: null,
-            name: '',
-            slug: '',
-            description: '',
+            title: '',
+            subtitle: '',
+            button_text: '',
+            button_link: '',
             is_active: true,
         }
     }"
@@ -18,12 +19,12 @@
 
     {{-- HEADER --}}
     <div class="flex justify-between items-center mb-4">
-        <h1 class="text-xl font-semibold">Services</h1>
+        <h1 class="text-xl font-semibold">Heroes</h1>
         <button
             @click="openCreate = true"
             class="px-4 py-2 bg-black text-white rounded"
         >
-            Tambah Service
+            Tambah Hero
         </button>
     </div>
 
@@ -31,30 +32,32 @@
     <table class="w-full border text-sm">
         <thead class="bg-gray-100">
             <tr>
-                <th class="p-2 text-left">Name</th>
-                <th class="p-2">Slug</th>
-                <th class="p-2">Description</th>
+                <th class="p-2 text-left">Title</th>
+                <th class="p-2">Subtitle</th>
+                <th class="p-2">Button Text</th>
+                <th class="p-2">Button Link</th>
                 <th class="p-2">Image</th>
                 <th class="p-2">Active</th>
                 <th class="p-2">Aksi</th>
             </tr>
         </thead>
         <tbody>
-            @forelse($services as $service)
+            @forelse($heroes as $hero)
             <tr class="border-t">
-                <td class="p-2">{{ $service->name }}</td>
-                <td class="p-2">{{ $service->slug }}</td>
-                <td class="p-2">{{ $service->description }}</td>
+                <td class="p-2">{{ $hero->title }}</td>
+                <td class="p-2">{{ Str::limit($hero->subtitle, 50) }}</td>
+                <td class="p-2">{{ $hero->button_text ?? '-' }}</td>
+                <td class="p-2">{{ $hero->button_link ?? '-' }}</td>
                 <td class="p-2 text-center">
-                    @if($service->image)
+                    @if($hero->image)
                         <img
-                            src="{{ asset('storage/'.$service->image) }}"
+                            src="{{ asset('storage/'.$hero->image) }}"
                             class="h-10 mx-auto"
                         >
                     @endif
                 </td>
                 <td class="p-2 text-center">
-                    {{ $service->is_active ? 'Yes' : 'No' }}
+                    {{ $hero->is_active ? 'Yes' : 'No' }}
                 </td>
                 <td class="p-2 text-center space-x-2">
                     <button
@@ -62,11 +65,12 @@
                         @click="
                             openEdit = true;
                             editData = {
-                                id: {{ $service->id }},
-                                name: '{{ $service->name }}',
-                                slug: '{{ $service->slug }}',
-                                description: @js($service->description),
-                                is_active: {{ $service->is_active ? 'true' : 'false' }}
+                                id: {{ $hero->id }},
+                                title: @js($hero->title),
+                                subtitle: @js($hero->subtitle),
+                                button_text: @js($hero->button_text),
+                                button_link: @js($hero->button_link),
+                                is_active: {{ $hero->is_active ? 'true' : 'false' }}
                             }
                         "
                     >
@@ -74,10 +78,10 @@
                     </button>
 
                     <form
-                        action="{{ route('admin.services.destroy', $service) }}"
+                        action="{{ route('admin.heroes.destroy', $hero) }}"
                         method="POST"
                         class="inline"
-                        onsubmit="return confirm('Hapus service?')"
+                        onsubmit="return confirm('Hapus hero?')"
                     >
                         @csrf
                         @method('DELETE')
@@ -87,7 +91,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="5" class="p-4 text-center text-gray-500">
+                <td colspan="7" class="p-4 text-center text-gray-500">
                     Belum ada data
                 </td>
             </tr>
@@ -102,10 +106,10 @@
         class="fixed inset-0 bg-black/50 flex items-center justify-center"
     >
         <div class="bg-white w-full max-w-lg p-6">
-            <h2 class="text-lg font-semibold mb-4">Tambah Service</h2>
+            <h2 class="text-lg font-semibold mb-4">Tambah Hero</h2>
 
             <form
-                action="{{ route('admin.services.store') }}"
+                action="{{ route('admin.heroes.store') }}"
                 method="POST"
                 enctype="multipart/form-data"
                 class="space-y-3"
@@ -113,24 +117,29 @@
                 @csrf
 
                 <input
-                    name="name"
-                    placeholder="Name"
-                    class="w-full border p-2"
-                    required
-                >
-
-                <input
-                    name="slug"
-                    placeholder="Slug"
+                    name="title"
+                    placeholder="Title"
                     class="w-full border p-2"
                     required
                 >
 
                 <textarea
-                    name="description"
-                    placeholder="Description"
+                    name="subtitle"
+                    placeholder="Subtitle"
                     class="w-full border p-2"
                 ></textarea>
+
+                <input
+                    name="button_text"
+                    placeholder="Button Text"
+                    class="w-full border p-2"
+                >
+
+                <input
+                    name="button_link"
+                    placeholder="Button Link"
+                    class="w-full border p-2"
+                >
 
                 <input type="file" name="image">
 
@@ -159,7 +168,7 @@
         class="fixed inset-0 bg-black/50 flex items-center justify-center"
     >
         <div class="bg-white w-full max-w-lg p-6">
-            <h2 class="text-lg font-semibold mb-4">Edit Service</h2>
+            <h2 class="text-lg font-semibold mb-4">Edit Hero</h2>
 
             <form
                 :action="`${baseUrl}/${editData.id}`"
@@ -171,24 +180,29 @@
                 @method('PUT')
 
                 <input
-                    name="name"
-                    x-model="editData.name"
-                    class="w-full border p-2"
-                    required
-                >
-
-                <input
-                    name="slug"
-                    x-model="editData.slug"
+                    name="title"
+                    x-model="editData.title"
                     class="w-full border p-2"
                     required
                 >
 
                 <textarea
-                    name="description"
-                    x-model="editData.description"
+                    name="subtitle"
+                    x-model="editData.subtitle"
                     class="w-full border p-2"
                 ></textarea>
+
+                <input
+                    name="button_text"
+                    x-model="editData.button_text"
+                    class="w-full border p-2"
+                >
+
+                <input
+                    name="button_link"
+                    x-model="editData.button_link"
+                    class="w-full border p-2"
+                >
 
                 <input type="file" name="image">
 
