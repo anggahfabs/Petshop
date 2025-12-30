@@ -4,14 +4,18 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Product;
+use App\Models\Category;
+use App\Models\Brand;
 use Illuminate\Http\Request;
 
 class ProductController extends Controller
 {
     public function index()
     {
-        $products = Product::latest()->get();
-        return view('admin.products.index', compact('products'));
+        $products = Product::with(['category', 'brand'])->latest()->get();
+        $categories = Category::where('is_active', 1)->get();
+        $brands = Brand::where('is_active', 1)->get();
+        return view('admin.products.index', compact('products', 'categories', 'brands'));
     }
 
     public function store(Request $request)
@@ -19,6 +23,8 @@ class ProductController extends Controller
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'slug'        => 'required|string|unique:products,slug',
+            'category_id' => 'nullable|exists:categories,id',
+            'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
             'image'       => 'nullable|image',
@@ -43,6 +49,8 @@ class ProductController extends Controller
         $data = $request->validate([
             'name'        => 'required|string|max:255',
             'slug'        => 'required|string|unique:products,slug,' . $product->id,
+            'category_id' => 'nullable|exists:categories,id',
+            'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
             'image'       => 'nullable|image',

@@ -14,7 +14,7 @@
     @include('partials.navbar')
     
     {{-- Content --}}
-    <main class="flex-1 px-6 py-8">
+    <main class="flex-1">
         @yield('content')
     </main>
     
@@ -22,5 +22,12 @@
     @include('partials.footer')
     
     <script src="https://unpkg.com/aos@next/dist/aos.js"></script>
+    <script>
+        AOS.init({
+            duration: 1000,
+            once: true,
+            easing: 'ease-out-cubic',
+        });
+    </script>
 </body>
 </html>

@@ -12,6 +12,8 @@ class Product extends Model
         'description',
         'price',
         'image',
+        'category_id',
+        'brand_id',
         'is_active',
     ];
 
@@ -19,4 +21,14 @@ class Product extends Model
         'price'     => 'decimal:2',
         'is_active' => 'boolean',
     ];
+
+    public function category()
+    {
+        return $this->belongsTo(Category::class);
+    }
+
+    public function brand()
+    {
+        return $this->belongsTo(Brand::class);
+    }
 }

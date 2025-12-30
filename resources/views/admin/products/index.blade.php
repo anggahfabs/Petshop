@@ -10,6 +10,8 @@
             id: null,
             name: '',
             slug: '',
+            category_id: '',
+            brand_id: '',
             description: '',
             price: 0,
             is_active: true,
@@ -33,6 +35,8 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="p-2 text-left">Name</th>
+                <th class="p-2">Category</th>
+                <th class="p-2">Brand</th>
                 <th class="p-2">Slug</th>
                 <th class="p-2">Price</th>
                 <th class="p-2">Description</th>
@@ -45,6 +49,8 @@
             @forelse($products as $product)
             <tr class="border-t">
                 <td class="p-2">{{ $product->name }}</td>
+                <td class="p-2">{{ $product->category->name ?? '-' }}</td>
+                <td class="p-2">{{ $product->brand->name ?? '-' }}</td>
                 <td class="p-2">{{ $product->slug }}</td>
                 <td class="p-2">
                     Rp {{ number_format($product->price, 0, ',', '.') }}
@@ -70,6 +76,8 @@
                                 id: {{ $product->id }},
                                 name: '{{ $product->name }}',
                                 slug: '{{ $product->slug }}',
+                                category_id: '{{ $product->category_id }}',
+                                brand_id: '{{ $product->brand_id }}',
                                 description: @js($product->description),
                                 price: {{ $product->price }},
                                 is_active: {{ $product->is_active ? 'true' : 'false' }}
@@ -93,7 +101,7 @@
             </tr>
             @empty
             <tr>
-                <td colspan="7" class="p-4 text-center text-gray-500">
+                <td colspan="9" class="p-4 text-center text-gray-500">
                     Belum ada data
                 </td>
             </tr>
@@ -120,6 +128,22 @@
 
                 <input name="name" placeholder="Name" class="w-full border p-2" required>
                 <input name="slug" placeholder="Slug" class="w-full border p-2" required>
+                
+                <div class="grid grid-cols-2 gap-2">
+                    <select name="category_id" class="w-full border p-2 bg-white">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                    <select name="brand_id" class="w-full border p-2 bg-white">
+                        <option value="">Select Brand</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <input name="price" type="number" min="0" step="0.01" placeholder="Price" class="w-full border p-2" required>
 
                 <textarea name="description" placeholder="Description" class="w-full border p-2"></textarea>
@@ -160,6 +184,22 @@
 
                 <input name="name" x-model="editData.name" class="w-full border p-2" required>
                 <input name="slug" x-model="editData.slug" class="w-full border p-2" required>
+                
+                <div class="grid grid-cols-2 gap-2">
+                    <select name="category_id" x-model="editData.category_id" class="w-full border p-2 bg-white">
+                        <option value="">Select Category</option>
+                        @foreach($categories as $cat)
+                            <option value="{{ $cat->id }}">{{ $cat->name }}</option>
+                        @endforeach
+                    </select>
+                     <select name="brand_id" x-model="editData.brand_id" class="w-full border p-2 bg-white">
+                        <option value="">Select Brand</option>
+                        @foreach($brands as $brand)
+                            <option value="{{ $brand->id }}">{{ $brand->name }}</option>
+                        @endforeach
+                    </select>
+                </div>
+
                 <input name="price" type="number" min="0" step="0.01" x-model="editData.price" class="w-full border p-2" required>
 
                 <textarea name="description" x-model="editData.description" class="w-full border p-2"></textarea>

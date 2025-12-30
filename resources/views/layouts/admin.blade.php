@@ -22,10 +22,15 @@
                 <li><a href="{{ route('admin.dashboard') }}">Dashboard</a></li>
                 <li><a href="{{ route('admin.heroes.index') }}">Heroes</a></li>
                 <li><a href="{{ route('admin.services.index') }}">Services</a></li>
+                <li><a href="{{ route('admin.categories.index') }}">Categories</a></li>
+                <li><a href="{{ route('admin.brands.index') }}">Brands</a></li>
                 <li><a href="{{ route('admin.products.index') }}">Products</a></li>
                 <li><a href="{{ route('admin.articles.index') }}">Articles</a></li>
-                <li><a href="{{ route('admin.gallery.index') }}">Gallery</a></li>
+                <li><a href="{{ route('admin.galleries.index') }}">Gallery</a></li>
                 <li><a href="{{ route('admin.appointments.index') }}">Appointments</a></li>
+                <li><a href="{{ route('admin.contacts.index') }}">Contact Info</a></li>
+                <li><a href="{{ route('admin.contact-messages.index') }}">Inbox</a></li>
+                <li><a href="{{ route('admin.subscribers.index') }}">Subscribers</a></li>
             </ul>
         </nav>
     </aside>

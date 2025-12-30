@@ -1,9 +1,5 @@
-@extends ('layouts.app')
-@section('title', 'Services')
-@section('content')
-<h1> Our Services</h1>
+@extends('layouts.app') <!-- atau layout frontend -->
 
-<ul>
-  {{-- -Service list --}}
-</ul>
+@section('content')
+    @include('pages.home.services') <!-- opsional, kalau mau reuse -->
 @endsection
