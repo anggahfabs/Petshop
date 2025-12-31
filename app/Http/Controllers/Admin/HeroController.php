@@ -15,15 +15,11 @@ class HeroController extends Controller
         return view('admin.heroes.index', compact('heroes'));
     }
 
-    // Create and Edit views are handled via Modals in index
-
     public function store(Request $request)
     {
         $data = $request->validate([
             'title' => 'required|string',
             'subtitle' => 'nullable|string',
-            'button_text' => 'nullable|string',
-            'button_link' => 'nullable|string',
             'image' => 'nullable|image',
             'is_active' => 'nullable|boolean',
         ]);
@@ -39,15 +35,11 @@ class HeroController extends Controller
         return redirect()->route('admin.heroes.index')->with('success', 'Hero created successfully');
     }
 
-
-
     public function update(Request $request, Hero $hero)
     {
         $data = $request->validate([
             'title' => 'required|string',
             'subtitle' => 'nullable|string',
-            'button_text' => 'nullable|string',
-            'button_link' => 'nullable|string',
             'image' => 'nullable|image',
             'is_active' => 'nullable|boolean',
         ]);
@@ -74,7 +66,6 @@ class HeroController extends Controller
 
         $hero->delete();
 
-        return back();
+        return back()->with('success', 'Hero deleted successfully');
     }
 }
-

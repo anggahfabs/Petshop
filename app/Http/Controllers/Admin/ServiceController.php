@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ServiceController extends Controller
 {
@@ -18,12 +19,12 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:services,slug',
             'description' => 'nullable|string',
             'image' => 'nullable|image',
             'is_active' => 'nullable|boolean',
         ]);
 
+        $data['slug'] = Str::slug($request->name);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
@@ -40,12 +41,12 @@ class ServiceController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'slug' => 'required|string|unique:services,slug,' . $service->id,
             'description' => 'nullable|string',
             'image' => 'nullable|image',
             'is_active' => 'nullable|boolean',
         ]);
 
+        $data['slug'] = Str::slug($request->name);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {

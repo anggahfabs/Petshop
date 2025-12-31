@@ -9,7 +9,6 @@
         editData: {
             id: null,
             name: '',
-            slug: '',
             category_id: '',
             brand_id: '',
             description: '',
@@ -37,7 +36,6 @@
                 <th class="p-2 text-left">Name</th>
                 <th class="p-2">Category</th>
                 <th class="p-2">Brand</th>
-                <th class="p-2">Slug</th>
                 <th class="p-2">Price</th>
                 <th class="p-2">Description</th>
                 <th class="p-2">Image</th>
@@ -51,7 +49,6 @@
                 <td class="p-2">{{ $product->name }}</td>
                 <td class="p-2">{{ $product->category->name ?? '-' }}</td>
                 <td class="p-2">{{ $product->brand->name ?? '-' }}</td>
-                <td class="p-2">{{ $product->slug }}</td>
                 <td class="p-2">
                     Rp {{ number_format($product->price, 0, ',', '.') }}
                 </td>
@@ -75,7 +72,6 @@
                             editData = {
                                 id: {{ $product->id }},
                                 name: '{{ $product->name }}',
-                                slug: '{{ $product->slug }}',
                                 category_id: '{{ $product->category_id }}',
                                 brand_id: '{{ $product->brand_id }}',
                                 description: @js($product->description),
@@ -127,7 +123,6 @@
                 @csrf
 
                 <input name="name" placeholder="Name" class="w-full border p-2" required>
-                <input name="slug" placeholder="Slug" class="w-full border p-2" required>
                 
                 <div class="grid grid-cols-2 gap-2">
                     <select name="category_id" class="w-full border p-2 bg-white">
@@ -183,7 +178,6 @@
                 @method('PUT')
 
                 <input name="name" x-model="editData.name" class="w-full border p-2" required>
-                <input name="slug" x-model="editData.slug" class="w-full border p-2" required>
                 
                 <div class="grid grid-cols-2 gap-2">
                     <select name="category_id" x-model="editData.category_id" class="w-full border p-2 bg-white">

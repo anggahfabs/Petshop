@@ -9,7 +9,6 @@
         editData: {
             id: null,
             name: '',
-            slug: '',
             description: '',
             is_active: true,
         }
@@ -32,7 +31,6 @@
         <thead class="bg-gray-100">
             <tr>
                 <th class="p-2 text-left">Name</th>
-                <th class="p-2">Slug</th>
                 <th class="p-2">Description</th>
                 <th class="p-2">Image</th>
                 <th class="p-2">Active</th>
@@ -43,7 +41,6 @@
             @forelse($services as $service)
             <tr class="border-t">
                 <td class="p-2">{{ $service->name }}</td>
-                <td class="p-2">{{ $service->slug }}</td>
                 <td class="p-2">{{ $service->description }}</td>
                 <td class="p-2 text-center">
                     @if($service->image)
@@ -64,7 +61,6 @@
                             editData = {
                                 id: {{ $service->id }},
                                 name: '{{ $service->name }}',
-                                slug: '{{ $service->slug }}',
                                 description: @js($service->description),
                                 is_active: {{ $service->is_active ? 'true' : 'false' }}
                             }
@@ -119,13 +115,6 @@
                     required
                 >
 
-                <input
-                    name="slug"
-                    placeholder="Slug"
-                    class="w-full border p-2"
-                    required
-                >
-
                 <textarea
                     name="description"
                     placeholder="Description"
@@ -173,13 +162,6 @@
                 <input
                     name="name"
                     x-model="editData.name"
-                    class="w-full border p-2"
-                    required
-                >
-
-                <input
-                    name="slug"
-                    x-model="editData.slug"
                     class="w-full border p-2"
                     required
                 >

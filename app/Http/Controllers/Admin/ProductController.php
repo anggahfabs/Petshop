@@ -7,6 +7,7 @@ use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
 use Illuminate\Http\Request;
+use Illuminate\Support\Str;
 
 class ProductController extends Controller
 {
@@ -22,7 +23,6 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name'        => 'required|string|max:255',
-            'slug'        => 'required|string|unique:products,slug',
             'category_id' => 'nullable|exists:categories,id',
             'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
@@ -31,6 +31,7 @@ class ProductController extends Controller
             'is_active'   => 'nullable|boolean',
         ]);
 
+        $data['slug'] = Str::slug($request->name);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
@@ -48,7 +49,6 @@ class ProductController extends Controller
     {
         $data = $request->validate([
             'name'        => 'required|string|max:255',
-            'slug'        => 'required|string|unique:products,slug,' . $product->id,
             'category_id' => 'nullable|exists:categories,id',
             'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
@@ -57,6 +57,7 @@ class ProductController extends Controller
             'is_active'   => 'nullable|boolean',
         ]);
 
+        $data['slug'] = Str::slug($request->name);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
