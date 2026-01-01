@@ -3,143 +3,312 @@
 @section('title', 'Gallery Items')
 
 @section('content')
-<div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Gallery Items</h1>
-    <button onclick="document.getElementById('createModal').classList.remove('hidden')" class="bg-blue-600 text-white px-4 py-2 rounded shadow hover:bg-blue-700 transition">
-        + Add New Image
-    </button>
-</div>
+<div
+    x-data="{
+        openCreate: false,
+        openEdit: false,
+        baseUrl: '{{ route('admin.galleries.index') }}',
+        editData: {
+            id: null,
+            caption: '',
+            is_active: true,
+        }
+    }"
+>
+    {{-- Header matching heroes design --}}
+    <div class="mb-8">
+        <div class="flex items-center gap-3 mb-2">
+            <div class="w-10 h-10 rounded-xl bg-gradient-to-br from-blue-500 to-blue-600 flex items-center justify-center">
+                <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                </svg>
+            </div>
+            <div>
+                <h1 class="text-2xl font-bold text-slate-800">Gallery Items</h1>
+                <p class="text-sm text-slate-500">Kelola foto dan gambar gallery</p>
+            </div>
+        </div>
 
-@if(session('success'))
-    <div class="bg-green-100 text-green-700 p-4 rounded mb-4 border border-green-200">
-        {{ session('success') }}
+        <div class="flex justify-end">
+            <button
+                @click="openCreate = true"
+                class="px-4 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl font-medium hover:shadow-lg hover:scale-105 transition-all duration-200 flex items-center gap-2"
+            >
+                <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                </svg>
+                Add New Image
+            </button>
+        </div>
     </div>
-@endif
 
-<div class="bg-white rounded shadow overflow-hidden">
-    <table class="w-full text-left border-collapse">
-        <thead class="bg-gray-50 border-b">
-            <tr>
-                <th class="px-6 py-4 font-semibold text-gray-700">Image</th>
-                <th class="px-6 py-4 font-semibold text-gray-700">Caption</th>
-                <th class="px-6 py-4 font-semibold text-gray-700">Status</th>
-                <th class="px-6 py-4 font-semibold text-gray-700">Actions</th>
-            </tr>
-        </thead>
-        <tbody class="divide-y divide-gray-200">
-            @forelse($galleries as $item)
-                <tr class="hover:bg-gray-50 transition">
-                    <td class="px-6 py-4">
-                        <img src="{{ asset('storage/' . $item->image) }}" alt="img" class="h-16 w-16 object-cover rounded border">
-                    </td>
-                    <td class="px-6 py-4 text-gray-600">
-                        {{ $item->caption ?? '-' }}
-                    </td>
-                    <td class="px-6 py-4">
-                        <span class="px-2 py-1 text-xs rounded-full font-medium {{ $item->is_active ? 'bg-green-100 text-green-800' : 'bg-red-100 text-red-800' }}">
-                            {{ $item->is_active ? 'Active' : 'Inactive' }}
-                        </span>
-                    </td>
-                    <td class="px-6 py-4 flex items-center gap-3">
-                        <button 
-                            onclick="openEditModal({{ $item->id }}, '{{ addslashes($item->caption ?? '') }}', {{ $item->is_active }})"
-                            class="text-blue-600 hover:text-blue-800 font-medium"
-                        >
-                            Edit
-                        </button>
-                        <form action="{{ route('admin.galleries.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this image?');">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Delete</button>
-                        </form>
-                    </td>
-                </tr>
-            @empty
-                <tr>
-                    <td colspan="4" class="px-6 py-12 text-center text-gray-500">
-                        <p class="text-lg">No gallery items found.</p>
-                        <p class="text-sm">Click the button above to add your first image.</p>
-                    </td>
-                </tr>
-            @endforelse
-        </tbody>
-    </table>
-</div>
+    {{-- Success Message --}}
+    @if(session('success'))
+        <div class="mb-6 p-4 bg-green-50 border border-green-200 rounded-xl flex items-center gap-3">
+            <svg class="w-5 h-5 text-green-600" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4m6 2a9 9 0 11-18 0 9 9 0 0118 0z"/>
+            </svg>
+            <span class="text-green-700 font-medium">{{ session('success') }}</span>
+        </div>
+    @endif
 
-{{-- Create Modal --}}
-<div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl transform transition-all">
-        <h2 class="text-xl font-bold mb-4 text-gray-800">Add Gallery Image</h2>
-        <form action="{{ route('admin.galleries.store') }}" method="POST" enctype="multipart/form-data">
-            @csrf
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2 font-medium">Image <span class="text-red-500">*</span></label>
-                <input type="file" name="image" class="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200" required accept="image/*">
-            </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2 font-medium">Caption</label>
-                <input type="text" name="caption" class="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200" placeholder="Optional caption...">
-            </div>
-            <div class="mb-6 flex items-center">
-                <input type="checkbox" name="is_active" value="1" id="create_active" checked class="w-4 h-4 text-blue-600 rounded mr-2">
-                <label for="create_active" class="text-gray-700">Set as Active</label>
-            </div>
-            <div class="flex justify-end gap-3">
-                <button type="button" onclick="document.getElementById('createModal').classList.add('hidden')" class="px-4 py-2 border rounded hover:bg-gray-100">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Save Image</button>
-            </div>
-        </form>
+    {{-- Table matching heroes design --}}
+    <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
+        <div class="overflow-x-auto">
+            <table class="w-full">
+                <thead>
+                    <tr class="bg-slate-50 border-b border-slate-200">
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Image</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Caption</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Actions</th>
+                    </tr>
+                </thead>
+                <tbody class="divide-y divide-slate-100">
+                    @forelse($galleries as $item)
+                    <tr class="hover:bg-slate-50 transition-colors duration-150">
+                        <td class="px-6 py-4 text-center">
+                            <img
+                                src="{{ asset('storage/' . $item->image) }}"
+                                class="h-16 w-16 object-cover rounded-lg mx-auto border border-slate-200 shadow-sm"
+                                alt="{{ $item->caption ?? 'Gallery image' }}"
+                            >
+                        </td>
+                        <td class="px-6 py-4">
+                            @if($item->caption)
+                                <span class="text-sm text-slate-700">{{ $item->caption }}</span>
+                            @else
+                                <span class="text-sm text-slate-400 italic">No caption</span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4 text-center">
+                            @if($item->is_active)
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
+                                    <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
+                                    Active
+                                </span>
+                            @else
+                                <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
+                                    <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
+                                    Inactive
+                                </span>
+                            @endif
+                        </td>
+                        <td class="px-6 py-4">
+                            <div class="flex items-center justify-center gap-2">
+                                <button
+                                    @click="
+                                        openEdit = true;
+                                        editData = {
+                                            id: {{ $item->id }},
+                                            caption: @js($item->caption ?? ''),
+                                            is_active: {{ $item->is_active ? 'true' : 'false' }}
+                                        }
+                                    "
+                                    class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-blue-50 text-blue-600 rounded-lg hover:bg-blue-100 transition-colors duration-150 text-sm font-medium"
+                                >
+                                    <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                                    </svg>
+                                    Edit
+                                </button>
+
+                                <form
+                                    action="{{ route('admin.galleries.destroy', $item) }}"
+                                    method="POST"
+                                    class="inline"
+                                    onsubmit="return confirm('Delete this image?')"
+                                >
+                                    @csrf
+                                    @method('DELETE')
+                                    <button class="inline-flex items-center gap-1.5 px-3 py-1.5 bg-red-50 text-red-600 rounded-lg hover:bg-red-100 transition-colors duration-150 text-sm font-medium">
+                                        <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
+                                        </svg>
+                                        Delete
+                                    </button>
+                                </form>
+                            </div>
+                        </td>
+                    </tr>
+                    @empty
+                    <tr>
+                        <td colspan="4" class="px-6 py-12 text-center">
+                            <div class="flex flex-col items-center gap-2">
+                                <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                                    <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"/>
+                                </svg>
+                                <p class="text-slate-500 font-medium">No gallery items found</p>
+                                <p class="text-sm text-slate-400">Click "Add New Image" button to add your first image</p>
+                            </div>
+                        </td>
+                    </tr>
+                    @endforelse
+                </tbody>
+            </table>
+        </div>
     </div>
-</div>
 
-{{-- Edit Modal --}}
-<div id="editModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
-    <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl">
-        <h2 class="text-xl font-bold mb-4 text-gray-800">Edit Gallery Image</h2>
-        <form id="editForm" method="POST" enctype="multipart/form-data">
-            @csrf
-            @method('PUT')
-            
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2 font-medium">Change Image</label>
-                <p class="text-xs text-gray-500 mb-2">Leave empty to keep current image</p>
-                <input type="file" name="image" class="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200" accept="image/*">
+    {{-- CREATE Modal --}}
+    <div
+        x-show="openCreate"
+        x-cloak
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        @click.self="openCreate = false"
+    >
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden" @click.stop>
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4 flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold text-white">Add Gallery Image</h2>
             </div>
-            <div class="mb-4">
-                <label class="block text-gray-700 mb-2 font-medium">Caption</label>
-                <input type="text" name="caption" id="edit_caption" class="w-full border border-gray-300 p-2 rounded focus:ring focus:ring-blue-200">
-            </div>
-            <div class="mb-6 flex items-center">
-                <input type="checkbox" name="is_active" value="1" id="edit_is_active" class="w-4 h-4 text-blue-600 rounded mr-2">
-                <label for="edit_is_active" class="text-gray-700">Set as Active</label>
-            </div>
-            <div class="flex justify-end gap-3">
-                <button type="button" onclick="document.getElementById('editModal').classList.add('hidden')" class="px-4 py-2 border rounded hover:bg-gray-100">Cancel</button>
-                <button type="submit" class="px-4 py-2 bg-blue-600 text-white rounded hover:bg-blue-700">Update Image</button>
-            </div>
-        </form>
+
+            <form
+                action="{{ route('admin.galleries.store') }}"
+                method="POST"
+                enctype="multipart/form-data"
+                class="p-6 space-y-4"
+            >
+                @csrf
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">
+                        Image <span class="text-red-500">*</span>
+                    </label>
+                    <input 
+                        type="file" 
+                        name="image" 
+                        accept="image/*"
+                        class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-600 file:font-medium hover:file:bg-blue-100"
+                        required
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Caption</label>
+                    <input 
+                        name="caption" 
+                        placeholder="Optional caption for the image"
+                        class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
+                    >
+                </div>
+
+                <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                    <input type="hidden" name="is_active" value="0">
+                    <input 
+                        type="checkbox" 
+                        name="is_active" 
+                        value="1" 
+                        checked
+                        class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                        id="is_active_create"
+                    >
+                    <label for="is_active_create" class="text-sm font-medium text-slate-700 cursor-pointer">
+                        Set as Active
+                    </label>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+                    <button 
+                        type="button" 
+                        @click="openCreate = false" 
+                        class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
+                    >
+                        Save Image
+                    </button>
+                </div>
+            </form>
+        </div>
     </div>
+
+    {{-- EDIT Modal --}}
+    <div
+        x-show="openEdit"
+        x-cloak
+        class="fixed inset-0 bg-black/50 backdrop-blur-sm flex items-center justify-center z-50 p-4"
+        @click.self="openEdit = false"
+    >
+        <div class="bg-white w-full max-w-lg rounded-2xl shadow-2xl overflow-hidden" @click.stop>
+            <div class="bg-gradient-to-r from-blue-500 to-blue-600 px-6 py-4 flex items-center gap-3">
+                <div class="w-10 h-10 bg-white/20 rounded-xl flex items-center justify-center">
+                    <svg class="w-6 h-6 text-white" fill="none" stroke="currentColor" viewBox="0 0 24 24">
+                        <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
+                    </svg>
+                </div>
+                <h2 class="text-xl font-bold text-white">Edit Gallery Image</h2>
+            </div>
+
+            <form
+                :action="`${baseUrl}/${editData.id}`"
+                method="POST"
+                enctype="multipart/form-data"
+                class="p-6 space-y-4"
+            >
+                @csrf
+                @method('PUT')
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Change Image</label>
+                    <p class="text-xs text-slate-500 mb-2">Leave empty to keep current image</p>
+                    <input 
+                        type="file" 
+                        name="image" 
+                        accept="image/*"
+                        class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-600 file:font-medium hover:file:bg-blue-100"
+                    >
+                </div>
+
+                <div>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Caption</label>
+                    <input 
+                        name="caption" 
+                        x-model="editData.caption" 
+                        class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
+                    >
+                </div>
+
+                <div class="flex items-center gap-3 p-4 bg-slate-50 rounded-xl">
+                    <input type="hidden" name="is_active" value="0">
+                    <input
+                        type="checkbox"
+                        name="is_active"
+                        value="1"
+                        :checked="editData.is_active"
+                        class="w-5 h-5 text-blue-600 border-slate-300 rounded focus:ring-2 focus:ring-blue-500"
+                        id="is_active_edit"
+                    >
+                    <label for="is_active_edit" class="text-sm font-medium text-slate-700 cursor-pointer">
+                        Set as Active
+                    </label>
+                </div>
+
+                <div class="flex justify-end gap-3 pt-4 border-t border-slate-200">
+                    <button 
+                        type="button" 
+                        @click="openEdit = false" 
+                        class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
+                    >
+                        Cancel
+                    </button>
+                    <button 
+                        type="submit" 
+                        class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
+                    >
+                        Update Image
+                    </button>
+                </div>
+            </form>
+        </div>
+    </div>
+
 </div>
-
-<script>
-function openEditModal(id, caption, isActive) {
-    const form = document.getElementById('editForm');
-    form.action = `/admin/galleries/${id}`;
-    
-    document.getElementById('edit_caption').value = caption;
-    document.getElementById('edit_is_active').checked = isActive ? true : false;
-    
-    document.getElementById('editModal').classList.remove('hidden');
-}
-
-// Close modals when clicking outside
-window.onclick = function(event) {
-    if (event.target == document.getElementById('createModal')) {
-        document.getElementById('createModal').classList.add('hidden');
-    }
-    if (event.target == document.getElementById('editModal')) {
-        document.getElementById('editModal').classList.add('hidden');
-    }
-}
-</script>
 @endsection
