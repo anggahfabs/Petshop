@@ -55,7 +55,7 @@
                         >
                             Edit
                         </button>
-                        <form action="{{ route('admin.contacts.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this contact info?');">
+                        <form action="{{ route('admin.contact_settings.destroy', $item) }}" method="POST" onsubmit="return confirm('Delete this contact info?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Delete</button>
@@ -78,7 +78,7 @@
 <div id="createModal" class="fixed inset-0 bg-black bg-opacity-50 hidden flex items-center justify-center z-50">
     <div class="bg-white rounded-lg w-full max-w-md p-6 shadow-xl transform transition-all">
         <h2 class="text-xl font-bold mb-4 text-gray-800">Add Contact Info</h2>
-        <form action="{{ route('admin.contacts.store') }}" method="POST" enctype="multipart/form-data">
+        <form action="{{ route('admin.contact_settings.store') }}" method="POST" enctype="multipart/form-data">
             @csrf
             <div class="mb-4">
                 <label class="block text-gray-700 mb-2 font-medium">Title <span class="text-red-500">*</span></label>
@@ -140,7 +140,7 @@
 <script>
 function openEditModal(id, title, description, isActive) {
     const form = document.getElementById('editForm');
-    form.action = `/admin/contacts/${id}`;
+    form.action = `/admin/contact-settings/${id}`;
     
     document.getElementById('edit_title').value = title;
     document.getElementById('edit_description').value = description;

@@ -57,13 +57,13 @@
                             View
                         </button>
                         @if(!$msg->is_read)
-                            <form action="{{ route('admin.contact-messages.read', $msg) }}" method="POST">
+                            <form action="{{ route('admin.inbox.read', $msg) }}" method="POST">
                                 @csrf
                                 @method('PATCH')
                                 <button type="submit" class="text-green-600 hover:text-green-800 font-medium">Mark Read</button>
                             </form>
                         @endif
-                        <form action="{{ route('admin.contact-messages.destroy', $msg) }}" method="POST" onsubmit="return confirm('Delete this message?');">
+                        <form action="{{ route('admin.inbox.destroy', $msg) }}" method="POST" onsubmit="return confirm('Delete this message?');">
                             @csrf
                             @method('DELETE')
                             <button type="submit" class="text-red-600 hover:text-red-800 font-medium">Delete</button>

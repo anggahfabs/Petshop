@@ -12,7 +12,7 @@ class ContactController extends Controller
     public function index()
     {
         $contacts = Contact::latest()->get();
-        return view('admin.contacts.index', compact('contacts'));
+        return view('admin.contact_settings.index', compact('contacts'));
     }
 
     public function store(Request $request)
@@ -32,7 +32,7 @@ class ContactController extends Controller
 
         Contact::create($data);
 
-        return redirect()->route('admin.contacts.index')->with('success', 'Contact info created successfully');
+        return redirect()->route('admin.contact_settings.index')->with('success', 'Contact info created successfully');
     }
 
     public function update(Request $request, Contact $contact)
@@ -55,7 +55,7 @@ class ContactController extends Controller
 
         $contact->update($data);
 
-        return redirect()->route('admin.contacts.index')->with('success', 'Contact info updated successfully');
+        return redirect()->route('admin.contact_settings.index')->with('success', 'Contact info updated successfully');
     }
 
     public function destroy(Contact $contact)

@@ -11,7 +11,7 @@ class ContactMessageController extends Controller
     public function index()
     {
         $messages = ContactMessage::latest()->get();
-        return view('admin.contact_messages.index', compact('messages'));
+        return view('admin.inbox.index', compact('messages'));
     }
 
     public function destroy(ContactMessage $contactMessage)

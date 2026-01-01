@@ -7,7 +7,7 @@
                     <div class="w-8 h-8 md:w-10 md:h-10 bg-blue-600 rounded-xl flex items-center justify-center shadow-lg">
                         <svg class="w-5 h-5 md:w-6 md:h-6 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M10 2a8 8 0 100 16 8 8 0 000-16zM5 10a5 5 0 1110 0 5 5 0 01-10 0z"></path></svg>
                     </div>
-                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight">PET<span class="text-blue-600">SHOP</span></span>
+                    <span class="text-xl md:text-2xl font-bold text-white tracking-tight">OVI<span class="text-blue-600"> PETSHOP</span></span>
                 </a>
                 <p class="text-gray-400 text-sm md:text-lg leading-relaxed mb-8 text-center md:text-left">
                     {{ $siteSettings->footer_description ?? 'Providing the best care and products for your beloved pets since 2010. Your pet\'s happiness is our priority.' }}
@@ -88,7 +88,7 @@
 
         <div class="border-t border-white/5 pt-8 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
             <p class="text-gray-500 font-medium text-[10px] md:text-sm text-center md:text-left">
-                &copy; {{ date('Y') }} <span class="text-white font-bold text-base md:text-lg">PET<span class="text-blue-600">SHOP</span></span>. All rights reserved.
+                &copy; {{ date('Y') }} <span class="text-white font-bold text-base md:text-lg">OVI<span class="text-blue-600"> PETSHOP</span></span>. All rights reserved.
             </p>
             <div class="flex gap-6 md:gap-8 text-gray-400 font-medium text-[10px] md:text-sm">
                 <a href="#" class="hover:text-blue-500 transition-colors">Privacy Policy</a>

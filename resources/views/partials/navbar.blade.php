@@ -17,8 +17,8 @@
             <circle cx="18" cy="8" r="2"/>
         </svg>
     </div>
-    <span :class="(scrolled || !isHome || mobileMenuOpen) ? 'text-gray-900' : 'text-white'" class="text-xl md:text-3xl font-bold transition-colors duration-500 tracking-tight">
-        OVI<span class="text-blue-600">PET</span>
+    <span :class="(scrolled || !isHome || mobileMenuOpen) ? 'text-gray-900' : 'text-white'" class="text-lg md:text-3xl font-bold transition-colors duration-500 tracking-tight">
+        OVI<span class="text-blue-600"> PETSHOP</span>
     </span>
 </a>
 

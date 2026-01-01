@@ -22,6 +22,7 @@ use App\Http\Controllers\ArticlePageController;
 use App\Http\Controllers\ContactPageController;
 use App\Http\Controllers\AppointmentPageController;
 use App\Http\Controllers\SubscriberController;
+use App\Http\Controllers\Admin\DashboardController;
 
 // Frontend/Visitor Routes
 
@@ -81,9 +82,7 @@ Route::prefix('admin')->name('admin.')->group(function () {
     Route::middleware('auth')->group(function () {
         Route::post('/logout', [AuthController::class, 'logout'])->name('logout');
 
-        Route::get('/', function () {
-            return view('admin.dashboard');
-        })->name('dashboard');
+        Route::get('/', [DashboardController::class, 'index'])->name('dashboard');
 
         // Admin CRUD
         Route::resource('heroes', HeroController::class);
@@ -95,19 +94,16 @@ Route::prefix('admin')->name('admin.')->group(function () {
         Route::resource('categories', CategoryController::class);
         Route::resource('brands', BrandController::class);
 
-        // Admin Contact Info
-        Route::resource('contacts', AdminContactController::class);
+        // Admin Contact Settings
+        Route::resource('contact-settings', AdminContactController::class)->names('contact_settings');
 
-        // Admin Contact Messages (Inbox)
-        Route::get('contact-messages', [ContactMessageController::class, 'index'])->name('contact-messages.index');
-        Route::delete('contact-messages/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('contact-messages.destroy');
-        Route::patch('contact-messages/{contactMessage}/read', [ContactMessageController::class, 'markAsRead'])->name('contact-messages.read');
+        // Admin Inbox (Messages)
+        Route::get('inbox', [ContactMessageController::class, 'index'])->name('inbox.index');
+        Route::delete('inbox/{contactMessage}', [ContactMessageController::class, 'destroy'])->name('inbox.destroy');
+        Route::patch('inbox/{contactMessage}/read', [ContactMessageController::class, 'markAsRead'])->name('inbox.read');
 
         // Admin Newsletter Subscribers
         Route::get('subscribers', [AdminSubscriberController::class, 'index'])->name('subscribers.index');
         Route::delete('subscribers/{subscriber}', [AdminSubscriberController::class, 'destroy'])->name('subscribers.destroy');
-
-
-
     });
 });
