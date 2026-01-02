@@ -268,7 +268,7 @@
             </div>
 
             <form
-                :action="`/admin/contact-settings/${editData.id}`"
+                :action="`${baseUrl}/${editData.id}`"
                 method="POST"
                 enctype="multipart/form-data"
                 class="p-6 space-y-4"

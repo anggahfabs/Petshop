@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Heroes Management')
+
 @section('content')
 <div
     x-data="{

@@ -1,5 +1,7 @@
 @extends('layouts.admin')
 
+@section('title', 'Services Management')
+
 @section('content')
 <div
     x-data="{
@@ -94,7 +96,7 @@
                                         openEdit = true;
                                         editData = {
                                             id: {{ $service->id }},
-                                            name: '{{ $service->name }}',
+                                            name: @js($service->name),
                                             description: @js($service->description),
                                             is_active: {{ $service->is_active ? 'true' : 'false' }}
                                         }

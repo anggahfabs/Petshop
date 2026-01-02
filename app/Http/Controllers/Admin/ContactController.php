@@ -35,7 +35,7 @@ class ContactController extends Controller
         return redirect()->route('admin.contact_settings.index')->with('success', 'Contact info created successfully');
     }
 
-    public function update(Request $request, Contact $contact)
+    public function update(Request $request, Contact $contact_setting)
     {
         $data = $request->validate([
             'title' => 'required|string|max:255',
@@ -47,23 +47,23 @@ class ContactController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('logo')) {
-            if ($contact->logo) {
-                Storage::disk('public')->delete($contact->logo);
+            if ($contact_setting->logo) {
+                Storage::disk('public')->delete($contact_setting->logo);
             }
             $data['logo'] = $request->file('logo')->store('contacts', 'public');
         }
 
-        $contact->update($data);
+        $contact_setting->update($data);
 
         return redirect()->route('admin.contact_settings.index')->with('success', 'Contact info updated successfully');
     }
 
-    public function destroy(Contact $contact)
+    public function destroy(Contact $contact_setting)
     {
-        if ($contact->logo) {
-            Storage::disk('public')->delete($contact->logo);
+        if ($contact_setting->logo) {
+            Storage::disk('public')->delete($contact_setting->logo);
         }
-        $contact->delete();
+        $contact_setting->delete();
         return back()->with('success', 'Contact info deleted');
     }
 }

@@ -6,6 +6,7 @@ use App\Http\Controllers\Controller;
 use App\Models\Service;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
+use Illuminate\Support\Facades\Storage;
 
 class ServiceController extends Controller
 {
@@ -60,7 +61,10 @@ class ServiceController extends Controller
 
     public function destroy(Service $service)
     {
+        if ($service->image) {
+            Storage::disk('public')->delete($service->image);
+        }
         $service->delete();
-        return back();
+        return back()->with('success', 'Service deleted successfully');
     }
 }

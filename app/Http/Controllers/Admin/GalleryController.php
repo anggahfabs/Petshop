@@ -5,6 +5,7 @@ namespace App\Http\Controllers\Admin;
 use App\Http\Controllers\Controller;
 use App\Models\Gallery;
 use Illuminate\Http\Request;
+use Illuminate\Support\Facades\Storage;
 
 class GalleryController extends Controller
 {
@@ -45,6 +46,9 @@ class GalleryController extends Controller
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
+            if ($gallery->image) {
+                Storage::disk('public')->delete($gallery->image);
+            }
             $data['image'] = $request->file('image')->store('galleries', 'public');
         }
 
@@ -55,7 +59,10 @@ class GalleryController extends Controller
 
     public function destroy(Gallery $gallery)
     {
+        if ($gallery->image) {
+            Storage::disk('public')->delete($gallery->image);
+        }
         $gallery->delete();
-        return back();
+        return back()->with('success', 'Gallery deleted successfully');
     }
 }
