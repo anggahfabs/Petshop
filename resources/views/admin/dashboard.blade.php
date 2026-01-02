@@ -9,9 +9,10 @@
 </div>
 
 {{-- Stats Grid --}}
-<div class="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 xl:grid-cols-6 gap-6 mb-8">
+<div class="flex gap-6 overflow-x-auto pb-4 mb-8 snap-x snap-mandatory">
+
     {{-- Products --}}
-    <a href="{{ route('admin.products.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.products.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M16 11V7a4 4 0 00-8 0v4M5 9h14l1 12H4L5 9z"></path></svg>
@@ -24,7 +25,7 @@
     </a>
 
     {{-- Categories --}}
-    <a href="{{ route('admin.categories.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.categories.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-blue-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-blue-50 rounded-xl flex items-center justify-center text-blue-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 6h16M4 10h16M4 14h16M4 18h16"></path></svg>
@@ -37,7 +38,7 @@
     </a>
 
     {{-- Services --}}
-    <a href="{{ route('admin.services.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-green-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.services.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-green-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-green-50 rounded-xl flex items-center justify-center text-green-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M21 13.255A23.931 23.931 0 0112 15c-3.183 0-6.22-.62-9-1.745M16 6V4a2 2 0 00-2-2h-4a2 2 0 00-2 2v2m4 6h.01M5 20h14a2 2 0 002-2V8a2 2 0 00-2-2H5a2 2 0 00-2 2v10a2 2 0 002 2z"></path></svg>
@@ -50,7 +51,7 @@
     </a>
 
     {{-- Appointments --}}
-    <a href="{{ route('admin.appointments.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.appointments.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-purple-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-purple-50 rounded-xl flex items-center justify-center text-purple-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M8 7V3m8 4V3m-9 8h10M5 21h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -63,7 +64,7 @@
     </a>
 
     {{-- Articles --}}
-    <a href="{{ route('admin.articles.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-yellow-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.articles.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-yellow-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v4h4"></path></svg>
@@ -75,8 +76,21 @@
         </div>
     </a>
 
+    {{-- Gallery --}}
+    <a href="{{ route('admin.galleries.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-yellow-200 hover:shadow-md transition-all">
+        <div class="flex items-center gap-4">
+            <div class="w-12 h-12 bg-yellow-50 rounded-xl flex items-center justify-center text-yellow-600">
+                <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 20H5a2 2 0 01-2-2V6a2 2 0 012-2h10l4 4v10a2 2 0 01-2 2z"></path><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 4v4h4"></path></svg>
+            </div>
+            <div>
+                <p class="text-sm font-medium text-gray-400 uppercase tracking-wider">Gallery</p>
+                <h3 class="text-2xl font-bold text-gray-800">{{ $stats['galleries_count'] }}</h3>
+            </div>
+        </div>
+    </a>
+
     {{-- Unread Messages --}}
-    <a href="{{ route('admin.inbox.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-red-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.inbox.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-red-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-red-50 rounded-xl flex items-center justify-center text-red-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 8l7.89 5.26a2 2 0 002.22 0L21 8M5 19h14a2 2 0 002-2V7a2 2 0 00-2-2H5a2 2 0 00-2 2v12a2 2 0 002 2z"></path></svg>
@@ -89,7 +103,7 @@
     </a>
 
     {{-- Subscribers --}}
-    <a href="{{ route('admin.subscribers.index') }}" class="bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-all">
+    <a href="{{ route('admin.subscribers.index') }}"  class="min-w-[260px] snap-start bg-white p-6 rounded-2xl shadow-sm border border-gray-100 hover:border-indigo-200 hover:shadow-md transition-all">
         <div class="flex items-center gap-4">
             <div class="w-12 h-12 bg-indigo-50 rounded-xl flex items-center justify-center text-indigo-600">
                 <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 17h5l-1.405-1.405A2.032 2.032 0 0118 14.158V11a6.002 6.002 0 00-4-5.659V5a2 2 0 10-4 0v.341C7.67 6.165 6 8.388 6 11v3.159c0 .538-.214 1.055-.595 1.436L4 17h5m6 0v1a3 3 0 11-6 0v-1m6 0H9"></path></svg>
