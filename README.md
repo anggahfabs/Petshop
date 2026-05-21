@@ -13,7 +13,7 @@ A Laravel-based web application for a pet shop. Below are the complete technolog
 -   **Laravel Framework**: ^12 (core application)
 -   **Composer**: Dependency manager for PHP
 -   **MySQL / MariaDB**: Database (MySQL 8+ recommended); dump: `petshop.sql`
--   **Node.js** & **npm**: For building frontend assets (recommended Node.js 16+)
+-   **Node.js** & **pnpm**: For building frontend assets (recommended Node.js 16+)
 -   **Vite**: Dev server and bundler (via `laravel-vite-plugin`)
 -   **Tailwind CSS**: Utility-first CSS framework (v4)
 -   **Alpine.js**: Minimal JS framework for UI interactions
@@ -31,7 +31,7 @@ A Laravel-based web application for a pet shop. Below are the complete technolog
 
 -   PHP 8.2 or newer
 -   Composer
--   Node.js (recommended 16+) and npm
+-   Node.js (recommended 16+) and pnpm
 -   MySQL or MariaDB server
 -   Git (optional)
 
@@ -53,7 +53,7 @@ composer install
 3. Install Node dependencies:
 
 ```bash
-npm install
+pnpm install
 ```
 
 4. Copy the example environment file and edit DB settings:
@@ -110,7 +110,7 @@ php artisan storage:link
 9. Start the development server and Vite dev server:
 
 ```bash
-npm run dev
+pnpm run dev
 php artisan serve
 ```
 

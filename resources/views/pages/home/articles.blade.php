@@ -38,7 +38,7 @@
                     {{-- Image Container --}}
                     <div class="relative h-56 md:h-72 overflow-hidden">
                         @if($article->thumbnail)
-                            <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700">
+                            <img src="{{ asset('storage/' . $article->thumbnail) }}" alt="{{ $article->title }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-700" loading="lazy" decoding="async">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-blue-50 to-blue-100/50 flex items-center justify-center">
                                 <svg class="w-16 h-16 text-blue-200" fill="none" stroke="currentColor" viewBox="0 0 24 24">

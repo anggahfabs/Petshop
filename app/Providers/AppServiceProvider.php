@@ -23,7 +23,7 @@ class AppServiceProvider extends ServiceProvider
             \Illuminate\Support\Facades\URL::forceScheme('https');
         }
 
-        \Illuminate\Support\Facades\View::composer('*', function ($view) {
+        \Illuminate\Support\Facades\View::composer('partials.footer', function ($view) {
             $view->with('footerContacts', \App\Models\Contact::where('is_active', 1)->get());
             $view->with('siteSettings', \App\Models\SiteSetting::first());
         });

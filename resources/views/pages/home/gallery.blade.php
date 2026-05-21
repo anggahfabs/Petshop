@@ -21,7 +21,7 @@
                     data-aos-delay="{{ $index * 50 }}"
                 >
                     <!-- Enhanced shadow and hover effects -->
-                    <img src="{{ asset('storage/' . $item->image) }}" class="w-full h-auto object-cover transition-transform duration-[2000ms] group-hover:scale-125">
+                    <img src="{{ asset('storage/' . $item->image) }}" alt="{{ $item->title }}" class="w-full h-auto object-cover transition-transform duration-[2000ms] group-hover:scale-125" loading="lazy" decoding="async">
                     <div class="absolute inset-0 bg-gradient-to-t from-blue-600/90 via-blue-600/30 to-transparent opacity-0 group-hover:opacity-100 transition-all duration-700 flex flex-col justify-end p-4 md:p-12 backdrop-blur-[2px]">
                         <div class="transform translate-y-10 group-hover:translate-y-0 transition-transform duration-700">
                             <span class="text-blue-100 font-bold text-[8px] md:text-xs mb-2 md:mb-4 block uppercase tracking-wider">Store Moments</span>

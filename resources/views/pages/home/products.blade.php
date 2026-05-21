@@ -29,7 +29,7 @@
                     {{-- Enhanced card with backdrop blur and better shadows --}}
                     <div class="relative rounded-3xl md:rounded-[4rem] overflow-hidden bg-white/80 backdrop-blur-sm shadow-xl shadow-gray-200/70 aspect-[4/5] mb-5 md:mb-8 border border-gray-100/50 transition-all duration-700 group-hover:shadow-blue-300/50 group-hover:shadow-2xl group-hover:scale-[1.02]">
                         @if($product->image)
-                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000">
+                            <img src="{{ asset('storage/' . $product->image) }}" alt="{{ $product->name }}" class="w-full h-full object-cover group-hover:scale-110 transition-transform duration-1000" loading="lazy" decoding="async">
                         @else
                             <div class="w-full h-full bg-gradient-to-br from-gray-100 to-gray-50 flex items-center justify-center font-bold text-gray-300">NO IMAGE</div>
                         @endif

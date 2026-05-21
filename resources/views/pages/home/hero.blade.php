@@ -45,7 +45,19 @@
                 :class="activeSlide === {{ $index }} ? 'scale-110' : 'scale-100'"
             >
                 @if($hero->image)
-                    <img src="{{ asset('storage/' . $hero->image) }}" class="w-full h-full object-cover" alt="{{ $hero->title }}">
+                    <img
+                        src="{{ asset('storage/' . $hero->image) }}"
+                        class="w-full h-full object-cover"
+                        alt="{{ $hero->title }}"
+                        @if($index === 0)
+                            fetchpriority="high"
+                            loading="eager"
+                        @else
+                            loading="lazy"
+                            fetchpriority="low"
+                        @endif
+                        decoding="async"
+                    >
                 @else
                     <div class="w-full h-full bg-gradient-to-br from-blue-950 via-slate-900 to-indigo-950"></div>
                 @endif

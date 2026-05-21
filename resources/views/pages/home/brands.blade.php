@@ -68,6 +68,8 @@
                                             alt="{{ $brand->name }}" 
                                             class="h-full w-auto object-contain transform group-hover:scale-110 transition-transform duration-500 filter drop-shadow-lg"
                                             title="{{ $brand->name }}"
+                                            loading="lazy"
+                                            decoding="async"
                                         >
                                     @else
                                         <span class="text-base md:text-lg font-bold text-gray-400 group-hover:text-gray-700 uppercase transition-colors">{{ $brand->name }}</span>
