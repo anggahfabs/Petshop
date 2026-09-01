@@ -18,7 +18,7 @@ class GalleryController extends Controller
     public function store(Request $request)
     {
         $data = $request->validate([
-            'image' => 'required|image',        // image wajib di gallery
+            'image' => 'required|image|mimes:jpg,jpeg,png',        // image wajib di gallery
             'caption' => 'nullable|string',
             'is_active' => 'nullable|boolean',
         ]);
@@ -38,7 +38,7 @@ class GalleryController extends Controller
     public function update(Request $request, Gallery $gallery)
     {
         $data = $request->validate([
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'caption' => 'nullable|string',
             'is_active' => 'nullable|boolean',
         ]);

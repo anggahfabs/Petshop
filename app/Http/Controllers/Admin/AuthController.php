@@ -22,13 +22,13 @@ class AuthController extends Controller
     public function login(Request $request)
     {
         $credentials = $request->validate([
-            'email' => ['required', 'email'],
+            'email' => ['required', 'string'],
             'password' => ['required'],
         ]);
 
         if (Auth::attempt($credentials)) {
             $request->session()->regenerate();
-            return redirect()->route('admin.dashboard');
+            return redirect()->route('admin.dashboard')->with('success', 'Berhasil masuk ke dashboard admin.');
         }
 
         return back()->withErrors([
@@ -42,7 +42,7 @@ class AuthController extends Controller
         $request->session()->invalidate();
         $request->session()->regenerateToken();
 
-        return redirect()->route('admin.login');
+        return redirect()->route('admin.login')->with('success', 'Berhasil keluar dari panel admin.');
     }
 
     public function showRegister()
@@ -54,7 +54,7 @@ public function register(Request $request)
 {
     $data = $request->validate([
         'name' => ['required', 'string', 'max:255'],
-        'email' => ['required', 'email', 'unique:users'],
+        'email' => ['required', 'string', 'max:255', 'unique:users'],
         'password' => ['required', 'confirmed', 'min:8'],
     ]);
 
@@ -64,7 +64,7 @@ public function register(Request $request)
         'password' => Hash::make($data['password']),
     ]);
 
-    return redirect()->route('admin.login');
+    return redirect()->route('admin.login')->with('success', 'Akun admin berhasil dibuat. Silakan login.');
 }
 
 }

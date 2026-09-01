@@ -18,7 +18,7 @@
         <div class="bg-white rounded-2xl shadow-2xl p-8">
             <div class="mb-6">
                 <h2 class="text-2xl font-bold text-slate-900 mb-2">Forgot Kata Sandi?</h2>
-                <p class="text-slate-600 text-sm">Enter your email address and we'll send you a reset link</p>
+                <p class="text-slate-600 text-sm">Enter your username and we'll send you a reset link</p>
             </div>
 
             @if (session('status'))
@@ -38,19 +38,19 @@
             <form method="POST" action="{{ route('admin.password.email') }}" class="space-y-6">
                 @csrf
 
-                <!-- Email Input -->
+                <!-- Username Input -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-2">
-                        Alamat Email
+                        Username Admin
                     </label>
                     <input 
-                        type="email" 
+                        type="text" 
                         id="email"
                         name="email" 
                         value="{{ old('email') }}"
                         required
                         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="admin@example.com"
+                        placeholder="admin"
                     >
                 </div>
 
@@ -76,5 +76,6 @@
             <p class="text-slate-400 text-sm">&copy; {{ date('Y') }} Admin Panel. All rights reserved.</p>
         </div>
     </div>
+    @include('partials.sweet-alerts')
 </body>
 </html>

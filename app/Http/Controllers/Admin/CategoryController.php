@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Category;
+use App\Support\UniqueSlug;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 
 class CategoryController extends Controller
 {
@@ -23,7 +23,7 @@ class CategoryController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = UniqueSlug::make(Category::class, $data['name']);
         $data['is_active'] = $request->boolean('is_active');
 
         Category::create($data);
@@ -39,7 +39,7 @@ class CategoryController extends Controller
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = UniqueSlug::make(Category::class, $data['name'], $category->id);
         $data['is_active'] = $request->boolean('is_active');
 
         $category->update($data);

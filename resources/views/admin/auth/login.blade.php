@@ -22,7 +22,7 @@
                 @csrf
 
                 <div class="mb-5">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Alamat Email</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Username Admin</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -30,12 +30,12 @@
                             </svg>
                         </div>
                         <input
-                            type="email"
+                            type="text"
                             name="email"
                             value="{{ old('email') }}"
                             required
                             class="w-full border border-slate-300 pl-10 pr-4 py-3 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-blue-500 transition-all"
-                            placeholder="admin@example.com"
+                            placeholder="admin"
                         >
                     </div>
                     @error('email')

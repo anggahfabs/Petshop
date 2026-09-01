@@ -130,5 +130,6 @@
         </main>
     </div>
 </div>
+@include('partials.sweet-alerts')
 </body>
 </html>

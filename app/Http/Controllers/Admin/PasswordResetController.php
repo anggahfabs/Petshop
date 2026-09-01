@@ -16,13 +16,15 @@ class PasswordResetController extends Controller
 
     public function email(Request $request)
     {
-        $request->validate(['email' => 'required|email']);
+        $request->validate(['email' => 'required|string']);
 
         $status = Password::sendResetLink(
             $request->only('email')
         );
 
-        return back()->with('status', __($status));
+        return $status === Password::RESET_LINK_SENT
+            ? back()->with('success', __($status))
+            : back()->withErrors(['email' => __($status)]);
     }
 
     public function reset(string $token)
@@ -34,7 +36,7 @@ class PasswordResetController extends Controller
     {
         $request->validate([
             'token' => 'required',
-            'email' => 'required|email',
+            'email' => 'required|string',
             'password' => 'required|confirmed|min:8',
         ]);
 
@@ -48,7 +50,7 @@ class PasswordResetController extends Controller
         );
 
         return $status === Password::PASSWORD_RESET
-            ? redirect()->route('admin.login')->with('status', 'Password updated')
+            ? redirect()->route('admin.login')->with('success', 'Password berhasil diubah. Silakan login.')
             : back()->withErrors(['email' => __($status)]);
     }
 }

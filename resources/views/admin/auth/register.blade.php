@@ -48,19 +48,19 @@
                     >
                 </div>
 
-                <!-- Email Input -->
+                <!-- Username Input -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-2">
-                        Email Address
+                        Username Admin
                     </label>
                     <input 
-                        type="email" 
+                        type="text" 
                         id="email"
                         name="email" 
                         value="{{ old('email') }}"
                         required
                         class="w-full px-4 py-3 border border-slate-300 rounded-lg focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all"
-                        placeholder="admin@example.com"
+                        placeholder="admin"
                     >
                 </div>
 
@@ -116,5 +116,6 @@
             <p class="text-slate-400 text-sm">&copy; {{ date('Y') }} Admin Panel. All rights reserved.</p>
         </div>
     </div>
+    @include('partials.sweet-alerts')
 </body>
 </html>

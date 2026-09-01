@@ -52,7 +52,7 @@
 
                         <div class="space-y-2 group">
                             <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Nomor Telepon</label>
-                            <input type="text" name="phone" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="e.g. 08123456789">
+                            <input type="text" name="phone" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="e.g. 0812-345-6789">
                         </div>
 
                         <div class="space-y-2 group">
@@ -73,7 +73,7 @@
                 <div class="bg-gray-900 rounded-3xl md:rounded-[4rem] overflow-hidden h-[400px] md:h-full shadow-lg md:shadow-2xl shadow-gray-400 border-4 md:border-8 border-white relative group">
                     <iframe 
                         class="w-full h-full grayscale opacity-60 group-hover:grayscale-0 group-hover:opacity-100 transition-all duration-1000 scale-110 group-hover:scale-100" 
-                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3434.5020123!2d106.8271528!3d-6.2240217!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x0%3A0x0!2zNsKwMTMnMjYuNSJTIDEwNiw0OScyNS43IkU!5e0!3m2!1sen!2sid!4v1625000000000!5m2!1sen!2sid" 
+                        src="https://www.google.com/maps/embed?pb=!1m18!1m12!1m3!1d3965.8855527676646!2d106.84827187593706!3d-6.2787741614632155!2m3!1f0!2f0!3f0!3m2!1i1024!2i768!4f13.1!3m3!1m2!1s0x2e69f37555db4bcf%3A0x5a1d5a4384724405!2sOvi%20Petshop%20Condet!5e0!3m2!1sid!2sid!4v1788244499536!5m2!1sid!2sid" 
                         style="border:0;" 
                         allowfullscreen="" 
                         loading="lazy">

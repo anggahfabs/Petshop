@@ -6,8 +6,8 @@ use App\Http\Controllers\Controller;
 use App\Models\Product;
 use App\Models\Category;
 use App\Models\Brand;
+use App\Support\UniqueSlug;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
@@ -39,11 +39,11 @@ class ProductController extends Controller
             'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'image'       => 'nullable|image',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active'   => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = UniqueSlug::make(Product::class, $data['name']);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
@@ -65,11 +65,11 @@ class ProductController extends Controller
             'brand_id'    => 'nullable|exists:brands,id',
             'description' => 'nullable|string',
             'price'       => 'required|numeric|min:0',
-            'image'       => 'nullable|image',
+            'image'       => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active'   => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($request->name);
+        $data['slug'] = UniqueSlug::make(Product::class, $data['name'], $product->id);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {

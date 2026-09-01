@@ -20,7 +20,7 @@ class ContactController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'logo' => 'nullable|image',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -40,7 +40,7 @@ class ContactController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'description' => 'nullable|string',
-            'logo' => 'nullable|image',
+            'logo' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 

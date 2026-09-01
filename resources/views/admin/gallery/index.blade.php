@@ -181,7 +181,7 @@
                     <input 
                         type="file" 
                         name="image" 
-                        accept="image/*"
+                        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
                         class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-600 file:font-medium hover:file:bg-blue-100"
                         required
                     >
@@ -262,7 +262,7 @@
                     <input 
                         type="file" 
                         name="image" 
-                        accept="image/*"
+                        accept=".jpg,.jpeg,.png,image/jpeg,image/png"
                         class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 file:mr-4 file:py-2 file:px-4 file:rounded-lg file:border-0 file:bg-blue-50 file:text-blue-600 file:font-medium hover:file:bg-blue-100"
                     >
                 </div>

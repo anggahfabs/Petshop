@@ -4,8 +4,8 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Brand;
+use App\Support\UniqueSlug;
 use Illuminate\Http\Request;
-use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
 
 class BrandController extends Controller
@@ -20,11 +20,11 @@ class BrandController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = UniqueSlug::make(Brand::class, $data['name']);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {
@@ -40,11 +40,11 @@ class BrandController extends Controller
     {
         $data = $request->validate([
             'name' => 'required|string|max:255',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['name']);
+        $data['slug'] = UniqueSlug::make(Brand::class, $data['name'], $brand->id);
         $data['is_active'] = $request->boolean('is_active');
 
         if ($request->hasFile('image')) {

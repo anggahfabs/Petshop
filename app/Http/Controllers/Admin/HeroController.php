@@ -20,7 +20,7 @@ class HeroController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'subtitle' => 'nullable|string',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
@@ -40,7 +40,7 @@ class HeroController extends Controller
         $data = $request->validate([
             'title' => 'required|string',
             'subtitle' => 'nullable|string',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 

@@ -4,6 +4,7 @@ namespace App\Http\Controllers\Admin;
 
 use App\Http\Controllers\Controller;
 use App\Models\Article;
+use App\Support\UniqueSlug;
 use Illuminate\Http\Request;
 use Illuminate\Support\Str;
 use Illuminate\Support\Facades\Storage;
@@ -33,11 +34,11 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = UniqueSlug::make(Article::class, $data['title']);
         $data['is_active'] = $request->boolean('is_active');
         $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
 
@@ -55,11 +56,11 @@ class ArticleController extends Controller
         $data = $request->validate([
             'title' => 'required|string|max:255',
             'content' => 'required|string',
-            'image' => 'nullable|image',
+            'image' => 'nullable|image|mimes:jpg,jpeg,png',
             'is_active' => 'nullable|boolean',
         ]);
 
-        $data['slug'] = Str::slug($data['title']);
+        $data['slug'] = UniqueSlug::make(Article::class, $data['title'], $article->id);
         $data['is_active'] = $request->boolean('is_active');
         $data['excerpt'] = Str::limit(strip_tags($data['content']), 150);
 

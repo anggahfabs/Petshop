@@ -18,5 +18,6 @@
     
     {{-- Footer --}}
     @include('partials.footer')
+    @include('partials.sweet-alerts')
 </body>
 </html>
