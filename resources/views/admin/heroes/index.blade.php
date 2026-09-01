@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Heroes Management')
+@section('title', 'Kelola Hero')
 
 @section('content')
 <div
@@ -25,7 +25,7 @@
                 </svg>
             </div>
             <div>
-                <h1 class="text-2xl font-bold text-slate-800">Heroes Management</h1>
+                <h1 class="text-2xl font-bold text-slate-800">Kelola Hero</h1>
                 <p class="text-sm text-slate-500">Kelola hero sections untuk homepage slider</p>
             </div>
         </div>
@@ -73,7 +73,7 @@
                                     alt="{{ $hero->title }}"
                                 >
                             @else
-                                <span class="text-slate-400 text-sm">No image</span>
+                                <span class="text-slate-400 text-sm">Tidak ada gambar</span>
                             @endif
                         </td>
                         <td class="px-6 py-4 text-center">
@@ -81,12 +81,12 @@
                             @if($hero->is_active)
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                    Active
+                                    Aktif
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
                                     <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
-                                    Inactive
+                                    Nonaktif
                                 </span>
                             @endif
                         </td>
@@ -123,7 +123,7 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -319,7 +319,7 @@
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Update Hero
+                        Perbarui Hero
                     </button>
                 </div>
             </form>

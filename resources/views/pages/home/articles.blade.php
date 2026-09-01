@@ -16,15 +16,15 @@
             {{-- Added glow effect to badge --}}
             <div class="flex items-center justify-center gap-3 mb-4">
                 <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
-                <span class="inline-block bg-gradient-to-r from-blue-500/10 to-blue-600/10 text-blue-600 font-semibold text-xs uppercase tracking-wider px-4 py-1.5 rounded-full border border-blue-200/50 shadow-lg shadow-blue-500/10">Pet Knowledge</span>
+                <span class="inline-block bg-gradient-to-r from-blue-500/10 to-blue-600/10 text-blue-600 font-semibold text-xs uppercase tracking-wider px-4 py-1.5 rounded-full border border-blue-200/50 shadow-lg shadow-blue-500/10">Tips Hewan</span>
                 <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
             </div>
             {{-- Added gradient text to "Journal" --}}
             <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 mb-4 leading-tight tracking-tight px-2 md:px-0">
-                Latest From Our
-                <span class="block mt-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 bg-clip-text text-transparent">Journal</span>
+                Artikel dan
+                <span class="block mt-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-600 bg-clip-text text-transparent">Info Terbaru</span>
             </h1>
-            <p class="text-gray-600 text-sm md:text-lg mt-4 max-w-2xl mx-auto px-2 md:px-0">Discover expert tips, guides, and stories about pet care</p>
+            <p class="text-gray-600 text-sm md:text-lg mt-4 max-w-2xl mx-auto px-2 md:px-0">Baca tips, panduan, dan informasi seputar kebutuhan hewan peliharaan.</p>
         </div>
 
         {{-- Articles Grid --}}
@@ -60,7 +60,7 @@
                         {{-- Enhanced category badge with glow --}}
                         <div class="absolute bottom-6 left-6">
                             <div class="bg-gradient-to-r from-blue-600 to-blue-500 text-white px-4 py-2 rounded-full text-xs font-semibold uppercase tracking-wide shadow-lg shadow-blue-500/50">
-                                Article
+                                Artikel
                             </div>
                         </div>
                     </div>
@@ -75,7 +75,7 @@
                         </p>
                         
                         <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all">
-                            Read More
+                            Baca Selengkapnya
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path>
                             </svg>
@@ -92,7 +92,7 @@
         <div class="text-center mt-16" data-aos="fade-up">
             <a href="{{ route('articles.index') }}" class="group relative inline-flex items-center gap-3 bg-gradient-to-r from-blue-600 to-blue-500 text-white px-10 py-5 rounded-2xl font-semibold text-base hover:shadow-2xl hover:shadow-blue-500/50 hover:scale-105 transition-all overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-transparent via-white/20 to-transparent -translate-x-full group-hover:translate-x-full transition-transform duration-1000"></div>
-                <span class="relative z-10">View All Articles</span>
+                <span class="relative z-10">Lihat Semua Artikel</span>
                 <svg class="w-5 h-5 relative z-10 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                 </svg>

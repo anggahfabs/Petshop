@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Get In Touch')
+@section('title', 'Hubungi Kami')
 
 @section('content')
 <div class="pt-24 md:pt-40 pb-24 bg-gray-50 overflow-hidden relative">
@@ -10,8 +10,8 @@
     <div class="max-w-7xl mx-auto px-6 relative z-10">
         {{-- Header --}}
         <div class="text-center mb-16 md:mb-24" data-aos="fade-down">
-            <h2 class="text-blue-600 font-bold uppercase mb-4 md:mb-6 text-[10px] md:text-sm tracking-widest">Contact Support</h2>
-            <h1 class="text-3xl md:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight px-4">Let's Start A Conversation</h1>
+            <h2 class="text-blue-600 font-bold uppercase mb-4 md:mb-6 text-[10px] md:text-sm tracking-widest">Kontak OVI Petshop</h2>
+            <h1 class="text-3xl md:text-6xl font-bold text-gray-900 mb-6 md:mb-8 leading-tight px-4">Hubungi Kami</h1>
             <div class="w-24 md:w-48 h-1.5 md:h-2.5 bg-blue-600 mx-auto rounded-full"></div>
         </div>
 
@@ -21,8 +21,8 @@
             <div data-aos="fade-right">
                 <div class="bg-white p-8 md:p-16 rounded-3xl md:rounded-[4rem] shadow-xl md:shadow-2xl shadow-gray-300 border border-gray-100 h-full relative overflow-hidden">
                     <div class="mb-8 md:mb-12 text-center md:text-left">
-                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Send a Message</h3>
-                        <p class="text-gray-500 font-medium text-sm md:text-base px-2 md:px-0">Have questions or want to book a custom service? Our team is ready to help you.</p>
+                        <h3 class="text-2xl md:text-3xl font-bold text-gray-900 mb-3 md:mb-4">Kirim Pesan</h3>
+                        <p class="text-gray-500 font-medium text-sm md:text-base px-2 md:px-0">Ada pertanyaan tentang produk atau layanan? Tim kami siap membantu.</p>
                     </div>
 
                     @if(session('success'))
@@ -31,8 +31,8 @@
                                 <svg class="w-8 h-8" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M5 13l4 4L19 7"></path></svg>
                             </div>
                             <div>
-                                <h4 class="font-bold text-xl mb-1">Message Sent!</h4>
-                                <p class="font-semibold opacity-75">We'll get back to you soon.</p>
+                                <h4 class="font-bold text-xl mb-1">Pesan Terkirim!</h4>
+                                <p class="font-semibold opacity-75">Kami akan segera menghubungi Anda.</p>
                             </div>
                         </div>
                     @endif
@@ -41,27 +41,27 @@
                         @csrf
                         <div class="grid md:grid-cols-2 gap-6 md:gap-8">
                             <div class="space-y-2 group">
-                                <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Full Name</label>
+                                <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Nama Lengkap</label>
                                 <input type="text" name="name" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="e.g. John Doe" required>
                             </div>
                             <div class="space-y-2 group">
-                                <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Email Address</label>
+                                <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Alamat Email</label>
                                 <input type="email" name="email" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="name@example.com" required>
                             </div>
                         </div>
 
                         <div class="space-y-2 group">
-                            <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Phone Number</label>
+                            <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Nomor Telepon</label>
                             <input type="text" name="phone" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="e.g. 08123456789">
                         </div>
 
                         <div class="space-y-2 group">
-                            <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Your Message</label>
+                            <label class="block text-[10px] md:text-xs font-bold uppercase text-gray-400 ml-1 group-focus-within:text-blue-600 transition-colors">Pesan Anda</label>
                             <textarea name="message" rows="5" class="w-full bg-gray-50 border-none px-6 py-4 md:py-5 rounded-xl md:rounded-2xl focus:ring-2 focus:ring-blue-600 transition-all font-bold text-gray-900 text-sm md:text-base" placeholder="What's on your mind?" required></textarea>
                         </div>
 
                         <button type="submit" class="w-full bg-blue-600 text-white font-bold py-4 md:py-6 rounded-2xl md:rounded-3xl shadow-xl md:shadow-2xl shadow-blue-200 hover:bg-blue-700 hover:-translate-y-1 transition-all active:scale-[0.98] text-sm md:text-base flex items-center justify-center gap-3 md:gap-4">
-                            Send Message
+                            Kirim Pesan
                             <svg class="w-5 h-5 md:w-6 md:h-6 rotate-45" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 19l9 2-9-18-9 18 9-2zm0 0v-8"></path></svg>
                         </button>
                     </form>

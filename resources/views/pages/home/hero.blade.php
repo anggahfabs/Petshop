@@ -21,8 +21,8 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 16l4.586-4.586a2 2 0 012.828 0L16 16m-2-2l1.586-1.586a2 2 0 012.828 0L20 14m-6-6h.01M6 20h12a2 2 0 002-2V6a2 2 0 00-2-2H6a2 2 0 00-2 2v12a2 2 0 002 2z"></path>
                     </svg>
                 </div>
-                <h1 class="text-4xl md:text-7xl font-bold text-white mb-4 md:mb-6">Welcome to OVI Petshop</h1>
-                <p class="text-base md:text-xl text-slate-400 max-w-xs md:max-w-md mx-auto">Please add heroes in admin panel to see the slider.</p>
+                <h1 class="text-4xl md:text-7xl font-bold text-white mb-4 md:mb-6">Selamat Datang di OVI Petshop</h1>
+                <p class="text-base md:text-xl text-slate-400 max-w-xs md:max-w-md mx-auto">Tambahkan hero di panel admin untuk menampilkan slider.</p>
             </div>
         </div>
     @endif
@@ -83,7 +83,7 @@
                             <div class="relative w-12 md:w-16 h-0.5 bg-gradient-to-r from-blue-400 via-blue-500 to-blue-600 rounded-full"></div>
                         </div>
                         <span class="relative text-blue-400 font-bold tracking-[0.2em] md:tracking-[0.25em] uppercase text-[10px] md:text-sm">
-                            Premium Pet Care
+                            OVI Petshop
                             <span class="absolute -inset-1 bg-blue-500/20 blur-sm -z-10 rounded"></span>
                         </span>
                     </div>
@@ -121,13 +121,13 @@
                         class="flex flex-col sm:flex-row gap-3 md:gap-4 pt-4 md:pt-6"
                     >
                         <a href="{{ route('products.index') }}" class="group relative overflow-hidden bg-blue-600 text-white px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-sm md:text-base shadow-2xl shadow-blue-500/40 hover:scale-[1.02] transition-all flex items-center justify-center gap-3">
-                            <span class="relative z-10">Shop Products</span>
+                            <span class="relative z-10">Lihat Produk</span>
                             <svg class="relative z-10 w-4 h-4 md:w-5 md:h-5 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                 <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M17 8l4 4m0 0l-4 4m4-4H3"></path>
                             </svg>
                         </a>
                         <a href="{{ route('contact.index') }}" class="group relative bg-white/5 backdrop-blur-xl text-white border border-white/20 px-8 md:px-12 py-4 md:py-5 rounded-2xl font-bold text-sm md:text-base hover:bg-white/10 transition-all text-center">
-                            Contact Us
+                            Hubungi Kami
                         </a>
                     </div>
                 </div>

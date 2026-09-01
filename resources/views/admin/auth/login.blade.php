@@ -22,7 +22,7 @@
                 @csrf
 
                 <div class="mb-5">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Email Address</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Alamat Email</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -49,7 +49,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Password</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Kata Sandi</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -70,15 +70,12 @@
                     type="submit"
                     class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm mb-4"
                 >
-                    Sign In
+                    Masuk
                 </button>
 
-                <div class="flex items-center justify-between text-sm">
+                <div class="flex items-center justify-center text-sm">
                     <a href="{{ route('admin.password.request') }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                        Forgot password?
-                    </a>
-                    <a href="{{ route('admin.register') }}" class="text-blue-600 hover:text-blue-700 font-medium transition-colors">
-                        Create account
+                        Lupa kata sandi?
                     </a>
                 </div>
             </form>

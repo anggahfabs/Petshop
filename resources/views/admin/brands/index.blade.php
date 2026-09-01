@@ -37,7 +37,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
-                Add New Brand
+                Tambah Merek
             </button>
         </div>
     </div>
@@ -60,7 +60,7 @@
                     <tr class="bg-slate-50 border-b border-slate-200">
                         <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Logo</th>
                         <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Products Count</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Jumlah Produk</th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Actions</th>
                     </tr>
@@ -95,12 +95,12 @@
                             @if($item->is_active)
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                    Active
+                                    Aktif
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
                                     <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
-                                    Inactive
+                                    Nonaktif
                                 </span>
                             @endif
                         </td>
@@ -127,7 +127,7 @@
                                     action="{{ route('admin.brands.destroy', $item) }}"
                                     method="POST"
                                     class="inline"
-                                    onsubmit="return confirm('Delete this brand? Products associated will be unbranded.')"
+                                    onsubmit="return confirm('Hapus this brand? Products associated will be unbranded.')"
                                 >
                                     @csrf
                                     @method('DELETE')
@@ -135,7 +135,7 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -148,8 +148,8 @@
                                 <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12l2 2 4-4M7.835 4.697a3.42 3.42 0 001.946-.806 3.42 3.42 0 014.438 0 3.42 3.42 0 001.946.806 3.42 3.42 0 013.138 3.138 3.42 3.42 0 00.806 1.946 3.42 3.42 0 010 4.438 3.42 3.42 0 00-.806 1.946 3.42 3.42 0 01-3.138 3.138 3.42 3.42 0 00-1.946.806 3.42 3.42 0 01-4.438 0 3.42 3.42 0 00-1.946-.806 3.42 3.42 0 01-3.138-3.138 3.42 3.42 0 00-.806-1.946 3.42 3.42 0 010-4.438 3.42 3.42 0 00.806-1.946 3.42 3.42 0 013.138-3.138z"/>
                                 </svg>
-                                <p class="text-slate-500 font-medium">No brands found</p>
-                                <p class="text-sm text-slate-400">Click "Add New Brand" button to create one</p>
+                                <p class="text-slate-500 font-medium">Belum ada merek</p>
+                                <p class="text-sm text-slate-400">Click "Tambah Merek" button to create one</p>
                             </div>
                         </td>
                     </tr>
@@ -217,7 +217,7 @@
                         id="is_active_create"
                     >
                     <label for="is_active_create" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -227,13 +227,13 @@
                         @click="openCreate = false" 
                         class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
                     >
-                        Cancel
+                        Batal
                     </button>
                     <button 
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Save Brand
+                        Simpan Merek
                     </button>
                 </div>
             </form>
@@ -300,7 +300,7 @@
                         id="is_active_edit"
                     >
                     <label for="is_active_edit" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -310,13 +310,13 @@
                         @click="openEdit = false" 
                         class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
                     >
-                        Cancel
+                        Batal
                     </button>
                     <button 
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Update Brand
+                        Perbarui Merek
                     </button>
                 </div>
             </form>

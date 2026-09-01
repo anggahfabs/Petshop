@@ -1,5 +1,5 @@
 @extends('layouts.app')
-@section('title', 'Exclusive Pet Collection')
+@section('title', 'Produk Petshop')
 
 @section('content')
 <div 
@@ -16,14 +16,14 @@
         <div class="mb-16 md:mb-20 text-center" data-aos="fade-down">
             <div class="flex items-center justify-center gap-3 mb-4">
                 <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
-                <span class="text-blue-600 font-semibold text-xs uppercase tracking-wider">Our Marketplace</span>
+                <span class="text-blue-600 font-semibold text-xs uppercase tracking-wider">Katalog Produk</span>
                 <div class="w-8 h-0.5 bg-gradient-to-r from-transparent via-blue-500 to-transparent rounded-full"></div>
             </div>
             <h1 class="text-4xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight">
-                Elite Pet
-                <span class="block text-blue-600 mt-1">Products</span>
+                Produk
+                <span class="block text-blue-600 mt-1">OVI Petshop</span>
             </h1>
-            <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">Discover premium products for your beloved companions</p>
+            <p class="text-gray-600 text-lg mt-4 max-w-2xl mx-auto">Temukan makanan, aksesoris, dan kebutuhan hewan peliharaan Anda.</p>
         </div>
 
         <div class="flex flex-col lg:flex-row gap-8 lg:gap-12">
@@ -53,7 +53,7 @@
                             <div class="w-10 h-10 bg-blue-50 rounded-xl flex items-center justify-center">
                                 <svg class="w-5 h-5 text-blue-600" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
                             </div>
-                            Shop Filters
+                            Filter Produk
                         </h3>
                         <button @click="showMobileFilters = false" class="lg:hidden text-gray-400 hover:text-gray-900">
                             <svg class="w-6 h-6" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M6 18L18 6M6 6l12 12"></path></svg>
@@ -65,7 +65,7 @@
 
                         {{-- PRICE RANGE --}}
                         <div>
-                            <h4 class="font-semibold text-sm text-gray-700 mb-4">Price Range</h4>
+                            <h4 class="font-semibold text-sm text-gray-700 mb-4">Rentang Harga</h4>
                             <div class="grid grid-cols-2 gap-3 mb-4">
                                 <div class="relative">
                                     <span class="absolute left-3 top-1/2 -translate-y-1/2 text-gray-400 text-xs">Rp</span>
@@ -76,13 +76,13 @@
                                     <input type="number" name="max_price" value="{{ request('max_price') }}" placeholder="Max" class="w-full bg-gray-50 border border-gray-200 pl-8 pr-3 py-3 rounded-xl text-xs focus:ring-2 focus:ring-blue-500 focus:border-transparent">
                                 </div>
                             </div>
-                            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-all text-sm shadow-lg shadow-blue-500/30">Apply Filters</button>
+                            <button type="submit" class="w-full bg-blue-600 text-white font-semibold py-3 rounded-xl hover:bg-blue-700 transition-all text-sm shadow-lg shadow-blue-500/30">Terapkan Filter</button>
                         </div>
 
                         {{-- CATEGORIES --}}
                         <div x-data="{ open: true }" class="pt-6 border-t border-gray-100">
                             <button type="button" @click="open = !open" class="w-full flex items-center justify-between font-semibold text-sm text-gray-700 mb-4 group">
-                                Categories
+                                Kategori
                                 <svg class="w-4 h-4 transition-transform duration-300" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             <div x-show="open" x-collapse class="space-y-3">
@@ -91,7 +91,7 @@
                                     <div class="w-5 h-5 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-600 transition-all flex items-center justify-center">
                                         <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
                                     </div>
-                                    <span class="text-gray-600 text-sm group-hover:text-blue-600 transition-colors">All Categories</span>
+                                    <span class="text-gray-600 text-sm group-hover:text-blue-600 transition-colors">Semua Kategori</span>
                                 </label>
                                 @foreach($categories as $category)
                                     <label class="group flex items-center gap-3 cursor-pointer">
@@ -108,7 +108,7 @@
                         {{-- BRANDS --}}
                         <div x-data="{ open: true }" class="pt-6 border-t border-gray-100">
                             <button type="button" @click="open = !open" class="w-full flex items-center justify-between font-semibold text-sm text-gray-700 mb-4 group">
-                                Brands
+                                Merek
                                 <svg class="w-4 h-4 transition-transform duration-300" :class="{'rotate-180': open}" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7"></path></svg>
                             </button>
                             <div x-show="open" x-collapse class="space-y-3">
@@ -117,7 +117,7 @@
                                     <div class="w-5 h-5 border-2 border-gray-200 rounded-lg peer-checked:border-blue-600 peer-checked:bg-blue-600 transition-all flex items-center justify-center">
                                         <svg class="w-3 h-3 text-white" fill="currentColor" viewBox="0 0 20 20"><path d="M16.707 5.293a1 1 0 010 1.414l-8 8a1 1 0 01-1.414 0l-4-4a1 1 0 011.414-1.414L8 12.586l7.293-7.293a1 1 0 011.414 0z"></path></svg>
                                     </div>
-                                    <span class="text-gray-600 text-sm group-hover:text-blue-600 transition-colors">All Brands</span>
+                                    <span class="text-gray-600 text-sm group-hover:text-blue-600 transition-colors">Semua Merek</span>
                                 </label>
                                 @foreach($brands as $brand)
                                     <label class="group flex items-center gap-3 cursor-pointer">
@@ -131,7 +131,7 @@
                             </div>
                         </div>
                         
-                        <a href="{{ route('products.index') }}" class="block text-center text-sm font-medium text-gray-400 hover:text-red-500 transition-colors pt-4 border-t border-gray-100">Reset Filters</a>
+                        <a href="{{ route('products.index') }}" class="block text-center text-sm font-medium text-gray-400 hover:text-red-500 transition-colors pt-4 border-t border-gray-100">Atur Ulang Filter</a>
                     </form>
                 </div>
             </aside>
@@ -143,8 +143,8 @@
                 <div class="flex flex-col md:flex-row justify-between items-center mb-8 md:mb-10 gap-6" data-aos="fade-up">
                     <div class="flex items-center justify-between w-full md:w-auto gap-3">
                         <div class="text-gray-500 text-sm">
-                            <span class="font-medium hidden sm:inline">Showing {{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }} of {{ $products->total() }} products</span>
-                            <span class="font-medium sm:hidden">{{ $products->total() }} Products Found</span>
+                            <span class="font-medium hidden sm:inline">Menampilkan {{ $products->firstItem() ?? 0 }}-{{ $products->lastItem() ?? 0 }} dari {{ $products->total() }} produk</span>
+                            <span class="font-medium sm:hidden">{{ $products->total() }} Produk</span>
                         </div>
                         
                         {{-- Mobile Filter Trigger --}}
@@ -153,7 +153,7 @@
                             class="lg:hidden flex items-center justify-center gap-2 bg-blue-600 text-white px-5 py-2.5 rounded-xl shadow-lg shadow-blue-500/30 text-xs font-bold active:scale-95 transition-all"
                         >
                             <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2.5" d="M3 4a1 1 0 011-1h16a1 1 0 011 1v2.586a1 1 0 01-.293.707l-6.414 6.414a1 1 0 00-.293.707V17l-4 4v-6.586a1 1 0 00-.293-.707L3.293 7.293A1 1 0 013 6.586V4z"></path></svg>
-                            Filters
+                            Filter
                         </button>
                     </div>
                     
@@ -167,7 +167,7 @@
                             type="text" 
                             name="search" 
                             value="{{ request('search') }}" 
-                            placeholder="Search products..." 
+                            placeholder="Cari produk..." 
                             class="pl-12 pr-4 py-3 md:py-4 bg-white border border-gray-200 rounded-2xl w-full md:w-[400px] shadow-sm focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all text-sm"
                         >
                         <svg class="w-5 h-5 text-gray-400 absolute left-4 top-1/2 -translate-y-1/2 group-focus-within:text-blue-600 transition-colors" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -180,8 +180,9 @@
                 @if($products->count())
                     <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-4 md:gap-8 mb-12">
                         @foreach($products as $index => $product)
-                            <div 
-                                class="group"
+                            <a
+                                href="{{ route('products.show', $product->slug) }}"
+                                class="group block"
                                 data-aos="fade-up" 
                                 data-aos-delay="{{ ($index % 3) * 100 }}"
                             >
@@ -219,7 +220,7 @@
                                     <h3 class="text-sm md:text-xl font-bold text-gray-900 mb-1 group-hover:text-blue-600 transition-colors line-clamp-1 select-none">{{ $product->name }}</h3>
                                     <p class="text-base md:text-2xl font-black text-blue-600">Rp {{ number_format($product->price, 0, ',', '.') }}</p>
                                 </div>
-                            </div>
+                            </a>
                         @endforeach
                     </div>
 
@@ -228,7 +229,7 @@
                         <div class="flex flex-col md:flex-row items-center justify-between gap-8 bg-white p-6 md:p-8 rounded-[2.5rem] md:rounded-[3.5rem] shadow-xl shadow-gray-200/50 border border-gray-50">
                             {{-- Info --}}
                             <div class="text-gray-500 font-medium">
-                                <span class="text-sm">Showing <span class="text-gray-900 font-bold tracking-tight">{{ $products->firstItem() ?? 0 }}</span> - <span class="text-gray-900 font-bold tracking-tight">{{ $products->lastItem() ?? 0 }}</span> of <span class="text-gray-900 font-bold tracking-tight">{{ $products->total() }}</span> elites</span>
+                                <span class="text-sm">Menampilkan <span class="text-gray-900 font-bold tracking-tight">{{ $products->firstItem() ?? 0 }}</span> - <span class="text-gray-900 font-bold tracking-tight">{{ $products->lastItem() ?? 0 }}</span> dari <span class="text-gray-900 font-bold tracking-tight">{{ $products->total() }}</span> produk</span>
                             </div>
 
                             {{-- Navigation --}}
@@ -288,11 +289,11 @@
                         <div class="w-24 h-24 bg-gray-50 rounded-full flex items-center justify-center mx-auto mb-8">
                             <svg class="w-12 h-12 text-gray-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9.172 16.172a4 4 0 015.656 0M9 10h.01M15 10h.01M21 12a9 9 0 11-18 0 9 9 0 0118 0z"></path></svg>
                         </div>
-                        <h3 class="text-2xl font-bold text-gray-900 mb-4">No Products Found</h3>
-                        <p class="text-gray-500 mb-8 text-base">We couldn't find any products matching your filters.</p>
+                        <h3 class="text-2xl font-bold text-gray-900 mb-4">Produk Tidak Ditemukan</h3>
+                        <p class="text-gray-500 mb-8 text-base">Tidak ada produk yang cocok dengan filter Anda.</p>
                         <a href="{{ route('products.index') }}" class="inline-flex items-center gap-2 bg-blue-600 text-white px-8 py-4 rounded-xl font-semibold hover:bg-blue-700 transition-all text-sm shadow-lg shadow-blue-500/30">
                             <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M4 4v5h.582m15.356 2A8.001 8.001 0 004.582 9m0 0H9m11 11v-5h-.581m0 0a8.003 8.003 0 01-15.357-2m15.357 2H15"></path></svg>
-                            Reset Filters
+                            Atur Ulang Filter
                         </a>
                     </div>
                 @endif

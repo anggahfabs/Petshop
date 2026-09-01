@@ -12,9 +12,20 @@ use Illuminate\Support\Facades\Storage;
 
 class ProductController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $products = Product::with(['category', 'brand'])->latest()->get();
+        $products = Product::with(['category', 'brand'])
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where(function ($subQuery) use ($request) {
+                    $subQuery->where('name', 'like', '%' . $request->search . '%')
+                        ->orWhere('description', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('status'), fn ($query) => $query->where('is_active', $request->status === 'active'))
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         $categories = Category::where('is_active', 1)->get();
         $brands = Brand::where('is_active', 1)->get();
         return view('admin.products.index', compact('products', 'categories', 'brands'));

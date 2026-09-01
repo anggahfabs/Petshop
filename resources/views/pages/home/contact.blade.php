@@ -24,14 +24,14 @@
             
             {{-- Enhanced buttons with glassmorphism and improved hover effects --}}
             <div class="flex flex-col sm:flex-row justify-center gap-4 md:gap-8 px-6">
-                <a href="{{ route('appointments.index') }}" 
+                <a href="{{ $whatsappLink }}" 
                    class="group relative bg-white text-blue-600 px-10 md:px-14 py-4 md:py-6 rounded-2xl md:rounded-3xl font-bold text-sm md:text-lg shadow-2xl hover:scale-105 transition-all duration-300">
-                    <span class="relative z-10">Book Appointment</span>
+                    <span class="relative z-10">Tanya via WhatsApp</span>
                 </a>
                 
                 <a href="{{ route('contact.index') }}" 
                    class="bg-white/10 backdrop-blur-md text-white px-10 md:px-14 py-4 md:py-6 rounded-2xl md:rounded-3xl font-bold text-sm md:text-lg hover:bg-white/20 border border-white/30 transition-all duration-300">
-                    Contact Us
+                    Hubungi Kami
                 </a>
             </div>
         </div>

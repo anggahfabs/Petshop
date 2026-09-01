@@ -10,9 +10,21 @@ use Illuminate\Support\Facades\Storage;
 
 class ArticleController extends Controller
 {
-    public function index()
+    public function index(Request $request)
     {
-        $articles = Article::latest()->get();
+        $articles = Article::query()
+            ->when($request->filled('search'), function ($query) use ($request) {
+                $query->where(function ($subQuery) use ($request) {
+                    $subQuery->where('title', 'like', '%' . $request->search . '%')
+                        ->orWhere('excerpt', 'like', '%' . $request->search . '%')
+                        ->orWhere('content', 'like', '%' . $request->search . '%');
+                });
+            })
+            ->when($request->filled('status'), fn ($query) => $query->where('is_active', $request->status === 'active'))
+            ->latest()
+            ->paginate(10)
+            ->withQueryString();
+
         return view('admin.articles.index', compact('articles'));
     }
 

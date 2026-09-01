@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Products Management')
+@section('title', 'Kelola Produk')
 
 @section('content')
 <div
@@ -28,7 +28,7 @@
                 </svg>
             </div>
             <div>
-                <h1 class="text-2xl font-bold text-slate-800">Products</h1>
+                <h1 class="text-2xl font-bold text-slate-800">Produk</h1>
                 <p class="text-sm text-slate-500">Kelola produk Anda</p>
             </div>
         </div>
@@ -41,10 +41,29 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
-                Tambah Product
+                Tambah Produk
             </button>
         </div>
     </div>
+
+    <form method="GET" action="{{ route('admin.products.index') }}" class="mb-5 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[1fr_auto_auto]">
+        <input
+            type="text"
+            name="search"
+            value="{{ request('search') }}"
+            placeholder="Cari nama atau deskripsi produk..."
+            class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+        >
+        <select name="status" class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10">
+            <option value="">Semua status</option>
+            <option value="active" @selected(request('status') === 'active')>Aktif</option>
+            <option value="inactive" @selected(request('status') === 'inactive')>Nonaktif</option>
+        </select>
+        <div class="flex gap-2">
+            <button type="submit" class="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white">Terapkan</button>
+            <a href="{{ route('admin.products.index') }}" class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700">Atur ulang</a>
+        </div>
+    </form>
 
     {{-- Table matching heroes design --}}
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
@@ -52,13 +71,13 @@
             <table class="w-full">
                 <thead>
                     <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Name</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Category</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Brand</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Price</th>
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Image</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Nama</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Kategori</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Merek</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Harga</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Gambar</th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -114,12 +133,12 @@
                             @if($product->is_active)
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                    Active
+                                    Aktif
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
                                     <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
-                                    Inactive
+                                    Nonaktif
                                 </span>
                             @endif
                         </td>
@@ -158,7 +177,7 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -182,6 +201,10 @@
         </div>
     </div>
 
+    <div class="mt-5">
+        {{ $products->links() }}
+    </div>
+
     {{-- CREATE Modal --}}
     <div
         x-show="openCreate"
@@ -196,7 +219,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold text-white">Tambah Product</h2>
+                <h2 class="text-xl font-bold text-white">Tambah Produk</h2>
             </div>
 
             <form
@@ -209,11 +232,11 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Product Name <span class="text-red-500">*</span>
+                        Nama Produk <span class="text-red-500">*</span>
                     </label>
                     <input 
                         name="name" 
-                        placeholder="Enter product name"
+                        placeholder="Masukkan nama produk"
                         class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                         required 
                     >
@@ -221,24 +244,24 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Category</label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Kategori</label>
                         <select 
                             name="category_id" 
                             class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                         >
-                            <option value="">Select Category</option>
+                            <option value="">Pilih kategori</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Brand</label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Merek</label>
                         <select 
                             name="brand_id" 
                             class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                         >
-                            <option value="">Select Brand</option>
+                            <option value="">Pilih merek</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
@@ -248,7 +271,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Price (Rp) <span class="text-red-500">*</span>
+                        Harga (Rp) <span class="text-red-500">*</span>
                     </label>
                     <input 
                         name="price" 
@@ -262,17 +285,17 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Description</label>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Deskripsi</label>
                     <textarea 
                         name="description"
-                        placeholder="Enter product description (optional)"
+                        placeholder="Masukkan deskripsi produk (opsional)"
                         rows="3" 
                         class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200"
                     ></textarea>
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Product Image</label>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Gambar Produk</label>
                     <input 
                         type="file" 
                         name="image" 
@@ -292,7 +315,7 @@
                         id="is_active_create"
                     >
                     <label for="is_active_create" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -308,7 +331,7 @@
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Simpan Product
+                        Simpan Produk
                     </button>
                 </div>
             </form>
@@ -329,7 +352,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold text-white">Edit Product</h2>
+                <h2 class="text-xl font-bold text-white">Edit Produk</h2>
             </div>
 
             <form
@@ -343,7 +366,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Product Name <span class="text-red-500">*</span>
+                        Nama Produk <span class="text-red-500">*</span>
                     </label>
                     <input 
                         name="name" 
@@ -355,26 +378,26 @@
 
                 <div class="grid grid-cols-2 gap-4">
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Category</label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Kategori</label>
                         <select 
                             name="category_id" 
                             x-model="editData.category_id" 
                             class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                         >
-                            <option value="">Select Category</option>
+                            <option value="">Pilih kategori</option>
                             @foreach($categories as $cat)
                                 <option value="{{ $cat->id }}">{{ $cat->name }}</option>
                             @endforeach
                         </select>
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Brand</label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Merek</label>
                         <select 
                             name="brand_id" 
                             x-model="editData.brand_id" 
                             class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 bg-white"
                         >
-                            <option value="">Select Brand</option>
+                            <option value="">Pilih merek</option>
                             @foreach($brands as $brand)
                                 <option value="{{ $brand->id }}">{{ $brand->name }}</option>
                             @endforeach
@@ -384,7 +407,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Price (Rp) <span class="text-red-500">*</span>
+                        Harga (Rp) <span class="text-red-500">*</span>
                     </label>
                     <input 
                         name="price" 
@@ -398,7 +421,7 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Description</label>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Deskripsi</label>
                     <textarea 
                         name="description" 
                         x-model="editData.description" 
@@ -408,8 +431,8 @@
                 </div>
 
                 <div>
-                    <label class="block text-sm font-medium text-slate-700 mb-2">Change Image</label>
-                    <p class="text-xs text-slate-500 mb-2">Leave empty to keep current image</p>
+                    <label class="block text-sm font-medium text-slate-700 mb-2">Ganti Gambar</label>
+                    <p class="text-xs text-slate-500 mb-2">Kosongkan jika ingin memakai gambar saat ini</p>
                     <input 
                         type="file" 
                         name="image" 
@@ -429,7 +452,7 @@
                         id="is_active_edit"
                     >
                     <label for="is_active_edit" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -445,7 +468,7 @@
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Update Product
+                        Perbarui Produk
                     </button>
                 </div>
             </form>

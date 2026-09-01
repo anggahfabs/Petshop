@@ -45,7 +45,7 @@
                                 {{ $article->excerpt ?? Str::limit(strip_tags($article->content), 120) }}
                             </p>
                             <a href="{{ route('articles.show', $article->slug) }}" class="inline-flex items-center gap-3 md:gap-4 text-gray-900 font-bold hover:gap-5 md:hover:gap-6 transition-all text-xs md:text-sm bg-gray-50 px-8 md:px-10 py-4 md:py-5 rounded-xl md:rounded-2xl group-hover:bg-blue-600 group-hover:text-white group-hover:shadow-xl group-hover:shadow-blue-200">
-                                Read More
+                            Baca Selengkapnya
                                 <svg class="w-4 h-4 md:w-5 md:h-5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                             </a>
                         </div>
@@ -58,7 +58,7 @@
             </div>
         @else
             <div class="text-center py-40 bg-white rounded-[5rem] shadow-2xl shadow-gray-200/50 border border-gray-100" data-aos="zoom-in">
-                <h3 class="text-3xl font-bold text-gray-900 mb-4">No Articles Yet</h3>
+                <h3 class="text-3xl font-bold text-gray-900 mb-4">Belum Ada Artikel</h3>
                 <p class="text-gray-400 text-lg font-semibold">Stay tuned for amazing pet stories!</p>
             </div>
         @endif

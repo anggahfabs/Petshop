@@ -7,22 +7,23 @@
         <div class="flex flex-col md:flex-row justify-between items-start md:items-end mb-16 md:mb-24 gap-8" data-aos="fade-up">
             <div class="max-w-2xl">
                 {{-- Badge with glow effect --}}
-                <span class="inline-block bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 font-bold uppercase mb-4 text-[10px] md:text-sm px-4 py-2 rounded-full border border-blue-500/20 shadow-lg shadow-blue-500/10">Our Marketplace</span>
+                <span class="inline-block bg-gradient-to-r from-blue-500/10 to-purple-500/10 text-blue-600 font-bold uppercase mb-4 text-[10px] md:text-sm px-4 py-2 rounded-full border border-blue-500/20 shadow-lg shadow-blue-500/10">Katalog Produk</span>
                 {{-- Title with gradient text --}}
-                <h1 class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent leading-tight px-2 md:px-0">Treat Your Pet With <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Quality</span></h1>
+                <h1 class="text-3xl md:text-5xl font-bold bg-gradient-to-r from-gray-900 via-gray-800 to-gray-900 bg-clip-text text-transparent leading-tight px-2 md:px-0">Pilihan Produk <span class="bg-gradient-to-r from-blue-600 to-purple-600 bg-clip-text text-transparent">Berkualitas</span></h1>
             </div>
             {{-- Enhanced button with glassmorphism --}}
             <a href="{{ route('products.index') }}" class="group relative bg-gradient-to-r from-gray-900 to-gray-800 text-white px-8 md:px-10 py-4 md:py-5 rounded-2xl font-bold flex items-center gap-4 hover:from-blue-600 hover:to-purple-600 transition-all duration-500 shadow-2xl shadow-gray-900/20 hover:shadow-blue-500/30 text-sm overflow-hidden">
                 <div class="absolute inset-0 bg-gradient-to-r from-blue-400/0 via-white/10 to-blue-400/0 translate-x-[-100%] group-hover:translate-x-[100%] transition-transform duration-1000"></div>
-                <span class="relative">Explore Full Shop</span>
+                <span class="relative">Lihat Semua Produk</span>
                 <svg class="relative w-5 h-5 md:w-6 md:h-6 group-hover:translate-x-2 transition-transform duration-300" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
             </a>
         </div>
 
         <div class="grid grid-cols-2 md:grid-cols-2 lg:grid-cols-3 gap-6 md:gap-12">
             @foreach($products as $index => $product)
-                <div 
-                    class="group"
+                <a
+                    href="{{ route('products.show', $product->slug) }}"
+                    class="group block"
                     data-aos="fade-up" 
                     data-aos-delay="{{ $index * 150 }}"
                 >
@@ -55,7 +56,7 @@
                             <span class="text-sm md:text-2xl font-bold text-gray-500 group-hover:bg-gradient-to-r group-hover:from-blue-600 group-hover:to-purple-600 group-hover:bg-clip-text group-hover:text-transparent transition-all duration-300">Rp {{ number_format($product->price, 0, ',', '.') }}</span>
                         </div>
                     </div>
-                </div>
+                </a>
             @endforeach
         </div>
     </div>

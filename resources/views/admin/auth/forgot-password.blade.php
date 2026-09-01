@@ -3,7 +3,7 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Forgot Password - Admin</title>
+    <title>Forgot Kata Sandi - Admin</title>
     @vite(['resources/css/app.css', 'resources/js/app.js'])
 </head>
 <body class="bg-gradient-to-br from-slate-900 via-slate-800 to-slate-900 min-h-screen flex items-center justify-center p-4">
@@ -17,7 +17,7 @@
         <!-- Card -->
         <div class="bg-white rounded-2xl shadow-2xl p-8">
             <div class="mb-6">
-                <h2 class="text-2xl font-bold text-slate-900 mb-2">Forgot Password?</h2>
+                <h2 class="text-2xl font-bold text-slate-900 mb-2">Forgot Kata Sandi?</h2>
                 <p class="text-slate-600 text-sm">Enter your email address and we'll send you a reset link</p>
             </div>
 
@@ -41,7 +41,7 @@
                 <!-- Email Input -->
                 <div>
                     <label for="email" class="block text-sm font-medium text-slate-700 mb-2">
-                        Email Address
+                        Alamat Email
                     </label>
                     <input 
                         type="email" 

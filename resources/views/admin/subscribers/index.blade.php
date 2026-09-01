@@ -1,10 +1,10 @@
 @extends('layouts.admin')
 
-@section('title', 'Newsletter Subscribers')
+@section('title', 'Pelanggan Newsletter')
 
 @section('content')
 <div class="flex justify-between items-center mb-6">
-    <h1 class="text-3xl font-bold">Newsletter Subscribers</h1>
+    <h1 class="text-3xl font-bold">Pelanggan Newsletter</h1>
     <div class="bg-blue-100 text-blue-800 px-4 py-2 rounded-lg font-bold">
         Total: {{ $subscribers->count() }}
     </div>
@@ -20,7 +20,7 @@
     <table class="w-full text-left border-collapse">
         <thead class="bg-gray-50 border-b">
             <tr>
-                <th class="px-6 py-4 font-semibold text-gray-700">Email Address</th>
+                <th class="px-6 py-4 font-semibold text-gray-700">Alamat Email</th>
                 <th class="px-6 py-4 font-semibold text-gray-700">Subscribed At</th>
                 <th class="px-6 py-4 font-semibold text-gray-700">Actions</th>
             </tr>

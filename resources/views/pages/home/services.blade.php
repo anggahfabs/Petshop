@@ -20,19 +20,19 @@
                 {{-- Enhanced badge with glow effect --}}
                 <div class="flex items-center gap-3 mb-4">
                     <div class="w-8 h-0.5 bg-gradient-to-r from-blue-500 to-blue-600 rounded-full shadow-lg shadow-blue-500/50"></div>
-                    <span class="text-blue-600 font-semibold text-xs uppercase tracking-wider">Professional Care</span>
+                    <span class="text-blue-600 font-semibold text-xs uppercase tracking-wider">Layanan Petshop</span>
                 </div>
                 {{-- Title with soft gradient text --}}
                 <h1 class="text-3xl md:text-5xl lg:text-6xl font-bold text-gray-900 leading-tight tracking-tight px-2 md:px-0">
-                    Our Exclusive
-                    <span class="block mt-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">Pet Services</span>
+                    Layanan
+                    <span class="block mt-1 bg-gradient-to-r from-blue-600 via-blue-500 to-blue-400 bg-clip-text text-transparent">OVI Petshop</span>
                 </h1>
-                <p class="text-gray-600 text-sm md:text-lg mt-4 max-w-xl px-2 md:px-0 text-center md:text-left">Providing premium care and comfort for your beloved companions</p>
+                <p class="text-gray-600 text-sm md:text-lg mt-4 max-w-xl px-2 md:px-0 text-center md:text-left">Informasi layanan dan bantuan untuk kebutuhan hewan peliharaan Anda.</p>
             </div>
             
             {{-- Enhanced button with glassmorphism and glow --}}
             <a href="{{ route('services.index') }}" class="group flex items-center gap-3 text-gray-900 font-semibold text-sm hover:text-blue-600 transition-colors">
-                <span>View All Services</span>
+                <span>Lihat Semua Layanan</span>
                 <div class="w-12 h-12 rounded-full bg-gradient-to-br from-blue-600 to-blue-700 flex items-center justify-center text-white group-hover:scale-110 transition-all duration-300 shadow-xl shadow-blue-500/40 group-hover:shadow-2xl group-hover:shadow-blue-500/50">
                     <svg class="w-5 h-5 group-hover:translate-x-0.5 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M17 8l4 4m0 0l-4 4m4-4H3"></path></svg>
                 </div>
@@ -62,7 +62,7 @@
                         
                         {{-- Enhanced badge with backdrop blur and glow --}}
                         <div class="absolute top-6 right-6 bg-white/95 backdrop-blur-md px-4 py-2 rounded-full shadow-lg shadow-blue-500/20">
-                            <span class="text-blue-600 font-semibold text-xs uppercase tracking-wide">Premium</span>
+                            <span class="text-blue-600 font-semibold text-xs uppercase tracking-wide">Layanan</span>
                         </div>
                     </div>
                     
@@ -76,8 +76,8 @@
                         </p>
                         
                         {{-- Enhanced link with smoother animation --}}
-                        <a href="{{ route('services.index') }}" class="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all hover:text-blue-700">
-                            Learn More
+                        <a href="{{ route('services.show', $service->slug) }}" class="inline-flex items-center gap-2 text-blue-600 font-semibold text-sm group-hover:gap-3 transition-all hover:text-blue-700">
+                            Lihat Detail
                             <svg class="w-4 h-4 group-hover:translate-x-1 transition-transform" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 5l7 7-7 7"></path></svg>
                         </a>
                     </div>

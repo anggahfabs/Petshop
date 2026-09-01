@@ -1,6 +1,6 @@
 @extends('layouts.admin')
 
-@section('title', 'Articles')
+@section('title', 'Kelola Artikel')
 
 @section('content')
 <div
@@ -25,7 +25,7 @@
                 </svg>
             </div>
             <div>
-                <h1 class="text-2xl font-bold text-slate-800">Articles</h1>
+                <h1 class="text-2xl font-bold text-slate-800">Artikel</h1>
                 <p class="text-sm text-slate-500">Kelola artikel dan konten blog</p>
             </div>
         </div>
@@ -38,7 +38,7 @@
                 <svg class="w-5 h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                 </svg>
-                Add New Article
+                Tambah Artikel
             </button>
         </div>
     </div>
@@ -53,16 +53,35 @@
         </div>
     @endif
 
+    <form method="GET" action="{{ route('admin.articles.index') }}" class="mb-5 grid gap-3 rounded-xl border border-slate-200 bg-white p-4 shadow-sm md:grid-cols-[1fr_auto_auto]">
+        <input
+            type="text"
+            name="search"
+            value="{{ request('search') }}"
+            placeholder="Cari judul atau isi artikel..."
+            class="w-full rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10"
+        >
+        <select name="status" class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm focus:border-slate-900 focus:ring-2 focus:ring-slate-900/10">
+            <option value="">Semua status</option>
+            <option value="active" @selected(request('status') === 'active')>Aktif</option>
+            <option value="inactive" @selected(request('status') === 'inactive')>Nonaktif</option>
+        </select>
+        <div class="flex gap-2">
+            <button type="submit" class="rounded-lg bg-slate-950 px-4 py-2.5 text-sm font-semibold text-white">Terapkan</button>
+            <a href="{{ route('admin.articles.index') }}" class="rounded-lg border border-slate-300 px-4 py-2.5 text-sm font-semibold text-slate-700">Atur ulang</a>
+        </div>
+    </form>
+
     {{-- Table matching heroes design --}}
     <div class="bg-white rounded-2xl shadow-sm border border-slate-200 overflow-hidden">
         <div class="overflow-x-auto">
             <table class="w-full">
                 <thead>
                     <tr class="bg-slate-50 border-b border-slate-200">
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Image</th>
-                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Title & Excerpt</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Gambar</th>
+                        <th class="px-6 py-4 text-left text-xs font-semibold text-slate-600 uppercase tracking-wider">Judul & Ringkasan</th>
                         <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Status</th>
-                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Actions</th>
+                        <th class="px-6 py-4 text-center text-xs font-semibold text-slate-600 uppercase tracking-wider">Aksi</th>
                     </tr>
                 </thead>
                 <tbody class="divide-y divide-slate-100">
@@ -95,12 +114,12 @@
                             @if($item->is_active)
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-green-100 text-green-700">
                                     <span class="w-1.5 h-1.5 bg-green-500 rounded-full mr-1.5"></span>
-                                    Active
+                                    Aktif
                                 </span>
                             @else
                                 <span class="inline-flex items-center px-3 py-1 rounded-full text-xs font-medium bg-slate-100 text-slate-600">
                                     <span class="w-1.5 h-1.5 bg-slate-400 rounded-full mr-1.5"></span>
-                                    Inactive
+                                    Nonaktif
                                 </span>
                             @endif
                         </td>
@@ -128,7 +147,7 @@
                                     action="{{ route('admin.articles.destroy', $item) }}"
                                     method="POST"
                                     class="inline"
-                                    onsubmit="return confirm('Delete this article?')"
+                                    onsubmit="return confirm('Hapus artikel ini?')"
                                 >
                                     @csrf
                                     @method('DELETE')
@@ -136,7 +155,7 @@
                                         <svg class="w-4 h-4" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                             <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 7l-.867 12.142A2 2 0 0116.138 21H7.862a2 2 0 01-1.995-1.858L5 7m5 4v6m4-6v6m1-10V4a1 1 0 00-1-1h-4a1 1 0 00-1 1v3M4 7h16"/>
                                         </svg>
-                                        Delete
+                                        Hapus
                                     </button>
                                 </form>
                             </div>
@@ -149,8 +168,8 @@
                                 <svg class="w-12 h-12 text-slate-300" fill="none" stroke="currentColor" viewBox="0 0 24 24">
                                     <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M9 12h6m-6 4h6m2 5H7a2 2 0 01-2-2V5a2 2 0 012-2h5.586a1 1 0 01.707.293l5.414 5.414a1 1 0 01.293.707V19a2 2 0 01-2 2z"/>
                                 </svg>
-                                <p class="text-slate-500 font-medium">No articles found</p>
-                                <p class="text-sm text-slate-400">Click "Add New Article" button to create one</p>
+                                <p class="text-slate-500 font-medium">Belum ada artikel</p>
+                                <p class="text-sm text-slate-400">Klik tombol "Tambah Artikel" untuk membuat artikel baru</p>
                             </div>
                         </td>
                     </tr>
@@ -158,6 +177,10 @@
                 </tbody>
             </table>
         </div>
+    </div>
+
+    <div class="mt-5">
+        {{ $articles->links() }}
     </div>
 
     {{-- CREATE Modal --}}
@@ -174,7 +197,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M12 4v16m8-8H4"/>
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold text-white">Add New Article</h2>
+                <h2 class="text-xl font-bold text-white">Tambah Artikel</h2>
             </div>
 
             <form
@@ -188,17 +211,17 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Article Title <span class="text-red-500">*</span>
+                            Judul Artikel <span class="text-red-500">*</span>
                         </label>
                         <input 
                             name="title" 
-                            placeholder="Enter article title"
+                            placeholder="Masukkan judul artikel"
                             class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200" 
                             required 
                         >
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Thumbnail Image</label>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Gambar Thumbnail</label>
                         <input 
                             type="file" 
                             name="image" 
@@ -210,11 +233,11 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Content <span class="text-red-500">*</span>
+                        Konten <span class="text-red-500">*</span>
                     </label>
                     <textarea 
                         name="content"
-                        placeholder="Enter article content"
+                        placeholder="Masukkan konten artikel"
                         rows="8" 
                         class="w-full px-4 py-2.5 border border-slate-300 rounded-xl focus:ring-2 focus:ring-blue-500 focus:border-transparent transition-all duration-200 resize-y"
                         required
@@ -232,7 +255,7 @@
                         id="is_active_create"
                     >
                     <label for="is_active_create" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -242,13 +265,13 @@
                         @click="openCreate = false" 
                         class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
                     >
-                        Cancel
+                        Batal
                     </button>
                     <button 
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Save Article
+                        Simpan Artikel
                     </button>
                 </div>
             </form>
@@ -269,7 +292,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M11 5H6a2 2 0 00-2 2v11a2 2 0 002 2h11a2 2 0 002-2v-5m-1.414-9.414a2 2 0 112.828 2.828L11.828 15H9v-2.828l8.586-8.586z"/>
                     </svg>
                 </div>
-                <h2 class="text-xl font-bold text-white">Edit Article</h2>
+                <h2 class="text-xl font-bold text-white">Edit Artikel</h2>
             </div>
 
             <form
@@ -284,7 +307,7 @@
                 <div class="grid grid-cols-2 gap-4">
                     <div>
                         <label class="block text-sm font-medium text-slate-700 mb-2">
-                            Article Title <span class="text-red-500">*</span>
+                            Judul Artikel <span class="text-red-500">*</span>
                         </label>
                         <input 
                             name="title" 
@@ -294,8 +317,8 @@
                         >
                     </div>
                     <div>
-                        <label class="block text-sm font-medium text-slate-700 mb-2">Change Thumbnail</label>
-                        <p class="text-xs text-slate-500 mb-2">Leave empty to keep current image</p>
+                        <label class="block text-sm font-medium text-slate-700 mb-2">Ganti Thumbnail</label>
+                        <p class="text-xs text-slate-500 mb-2">Kosongkan jika ingin memakai gambar saat ini</p>
                         <input 
                             type="file" 
                             name="image" 
@@ -307,7 +330,7 @@
 
                 <div>
                     <label class="block text-sm font-medium text-slate-700 mb-2">
-                        Content <span class="text-red-500">*</span>
+                        Konten <span class="text-red-500">*</span>
                     </label>
                     <textarea 
                         name="content" 
@@ -329,7 +352,7 @@
                         id="is_active_edit"
                     >
                     <label for="is_active_edit" class="text-sm font-medium text-slate-700 cursor-pointer">
-                        Set as Active
+                        Jadikan aktif
                     </label>
                 </div>
 
@@ -339,13 +362,13 @@
                         @click="openEdit = false" 
                         class="px-5 py-2.5 border border-slate-300 text-slate-700 rounded-xl hover:bg-slate-50 transition-all duration-200 font-medium"
                     >
-                        Cancel
+                        Batal
                     </button>
                     <button 
                         type="submit" 
                         class="px-5 py-2.5 bg-gradient-to-r from-blue-500 to-blue-600 text-white rounded-xl hover:shadow-lg hover:scale-105 transition-all duration-200 font-medium"
                     >
-                        Update Article
+                        Perbarui Artikel
                     </button>
                 </div>
             </form>

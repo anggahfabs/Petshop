@@ -24,7 +24,7 @@
 
         {{-- Desktop Menu --}}
         <ul class="hidden lg:flex items-center gap-10">
-            @php $links = ['Home' => 'home', 'Services' => 'services.index', 'Products' => 'products.index', 'Articles' => 'articles.index', 'Gallery' => 'gallery.index', 'Contact' => 'contact.index']; @endphp
+            @php $links = ['Beranda' => 'home', 'Layanan' => 'services.index', 'Produk' => 'products.index', 'Artikel' => 'articles.index', 'Galeri' => 'gallery.index', 'Kontak' => 'contact.index']; @endphp
             @foreach($links as $name => $route)
                 <li>
                     <a href="{{ route($route) }}" 
@@ -40,9 +40,9 @@
 
         {{-- Action Buttons --}}
         <div class="flex items-center gap-2 md:gap-4 relative z-[110]">
-            <a href="{{ route('appointments.index') }}" 
+            <a href="{{ $whatsappLink }}" 
                class="hidden md:flex bg-blue-600 text-white px-8 py-3.5 rounded-2xl font-bold text-sm shadow-xl shadow-blue-500/20 hover:bg-blue-700 hover:-translate-y-1 transition-all duration-300">
-                Book Visit
+                WhatsApp
             </a>
             
             {{-- Mobile Toggle --}}
@@ -73,8 +73,8 @@
                 </a>
             @endforeach
             <div class="pt-4 px-4 pb-6">
-                <a href="{{ route('appointments.index') }}" class="block w-full bg-blue-600 text-white text-center py-4 rounded-2xl font-extrabold shadow-xl shadow-blue-500/30">
-                    Book Appointment Now
+                <a href="{{ $whatsappLink }}" class="block w-full bg-blue-600 text-white text-center py-4 rounded-2xl font-extrabold shadow-xl shadow-blue-500/30">
+                    Tanya via WhatsApp
                 </a>
             </div>
         </div>

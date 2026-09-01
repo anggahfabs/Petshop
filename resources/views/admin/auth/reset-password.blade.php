@@ -1,12 +1,12 @@
 @extends('layouts.admin')
 
-@section('title', 'Reset Password')
+@section('title', 'Atur Ulang Kata Sandi')
 
 @section('content')
 <!-- Updated to match login page design with centered card and gradient background -->
 <div class="min-h-screen flex items-center justify-center p-4 bg-gradient-to-br from-slate-50 to-slate-100">
     <div class="w-full max-w-md">
-        <!-- Reset Password Card -->
+        <!-- Atur Ulang Kata Sandi Card -->
         <div class="bg-white rounded-2xl shadow-xl border border-slate-200 overflow-hidden">
             <!-- Header -->
             <div class="bg-gradient-to-r from-blue-600 to-blue-700 px-8 py-10 text-center">
@@ -15,7 +15,7 @@
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M15 7a2 2 0 012 2m4 0a6 6 0 01-7.743 5.743L11 17H9v2H7v2H4a1 1 0 01-1-1v-2.586a1 1 0 01.293-.707l5.964-5.964A6 6 0 1121 9z"></path>
                     </svg>
                 </div>
-                <h1 class="text-2xl font-bold text-white mb-2">Reset Password</h1>
+                <h1 class="text-2xl font-bold text-white mb-2">Atur Ulang Kata Sandi</h1>
                 <p class="text-blue-100 text-sm">Create a new password for your account</p>
             </div>
 
@@ -26,7 +26,7 @@
                 <input type="hidden" name="token" value="{{ $token }}">
 
                 <div class="mb-5">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Email Address</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Alamat Email</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -53,7 +53,7 @@
                 </div>
 
                 <div class="mb-5">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">New Password</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Kata Sandi Baru</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -79,7 +79,7 @@
                 </div>
 
                 <div class="mb-6">
-                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Confirm Password</label>
+                    <label class="block text-slate-700 mb-2 font-semibold text-sm">Konfirmasi Kata Sandi</label>
                     <div class="relative">
                         <div class="absolute inset-y-0 left-0 pl-3 flex items-center pointer-events-none">
                             <svg class="w-5 h-5 text-slate-400" fill="none" stroke="currentColor" viewBox="0 0 24 24">
@@ -100,7 +100,7 @@
                     type="submit"
                     class="w-full bg-blue-600 hover:bg-blue-700 text-white px-6 py-3 rounded-lg font-semibold transition-colors shadow-sm mb-4"
                 >
-                    Reset Password
+                    Atur Ulang Kata Sandi
                 </button>
 
                 <div class="text-center">

@@ -10,7 +10,7 @@
                     <span class="text-xl md:text-2xl font-bold text-white tracking-tight">OVI<span class="text-blue-600"> PETSHOP</span></span>
                 </a>
                 <p class="text-gray-400 text-sm md:text-lg leading-relaxed mb-8 text-center md:text-left">
-                    {{ $siteSettings->footer_description ?? 'Providing the best care and products for your beloved pets since 2010. Your pet\'s happiness is our priority.' }}
+                    {{ $siteSettings->footer_description ?? 'Menyediakan produk dan kebutuhan hewan peliharaan berkualitas untuk pelanggan OVI Petshop.' }}
                 </p>
                 {{-- Social Icons (Commented out by user previously, but I'll make them clean) --}}
                 <!-- <div class="flex gap-4">
@@ -25,9 +25,9 @@
 
             {{-- Column 2 --}}
             <div data-aos="fade-up" data-aos-delay="100" class="text-center md:text-left">
-                <h4 class="text-white text-base md:text-lg font-bold mb-6 md:mb-8 uppercase tracking-widest">Navigation</h4>
+                <h4 class="text-white text-base md:text-lg font-bold mb-6 md:mb-8 uppercase tracking-widest">Navigasi</h4>
                 <ul class="grid grid-cols-2 md:grid-cols-1 gap-x-4 gap-y-3 md:gap-4">
-                    @foreach(['Home' => 'home', 'Services' => 'services.index', 'Products' => 'products.index', 'Articles' => 'articles.index', 'Gallery' => 'gallery.index', 'Contact' => 'contact.index'] as $label => $route)
+                    @foreach(['Beranda' => 'home', 'Layanan' => 'services.index', 'Produk' => 'products.index', 'Artikel' => 'articles.index', 'Galeri' => 'gallery.index', 'Kontak' => 'contact.index'] as $label => $route)
                         <li>
                             <a href="{{ route($route) }}" class="text-gray-400 hover:text-blue-500 transition-colors flex items-center justify-center md:justify-start gap-2 group text-sm md:text-base font-medium">
                                 <span class="w-1.5 h-1.5 bg-blue-600 rounded-full opacity-0 group-hover:opacity-100 transition-opacity"></span>
@@ -40,7 +40,7 @@
 
             {{-- Column 3 --}}
             <div data-aos="fade-up" data-aos-delay="200" class="text-center md:text-left">
-                <h4 class="text-white text-base md:text-lg font-bold mb-6 md:mb-8 uppercase tracking-widest">Connect</h4>
+                <h4 class="text-white text-base md:text-lg font-bold mb-6 md:mb-8 uppercase tracking-widest">Kontak</h4>
                 <div class="space-y-6">
                     @forelse($footerContacts as $contact)
                         <div class="flex flex-col md:flex-row items-center md:items-start gap-3 md:gap-4">
@@ -55,7 +55,7 @@
                             </div>
                         </div>
                     @empty
-                        <p class="text-gray-500 text-sm">No contact info available.</p>
+                        <p class="text-gray-500 text-sm">Info kontak belum tersedia.</p>
                     @endforelse
                 </div>
             </div>
@@ -63,7 +63,7 @@
             {{-- Column 4 --}}
             <div data-aos="fade-up" data-aos-delay="300" class="text-center md:text-left">
                 <h4 class="text-white text-base md:text-lg font-bold mb-6 md:mb-8 uppercase tracking-widest">Newsletter</h4>
-                <p class="text-gray-400 mb-6 font-medium text-xs md:text-sm">Join our mailing list for exclusive pet tips.</p>
+                <p class="text-gray-400 mb-6 font-medium text-xs md:text-sm">Dapatkan info dan tips terbaru dari OVI Petshop.</p>
                 
                 @if(session('success_newsletter'))
                     <div class="bg-blue-600/20 text-blue-400 p-4 rounded-xl mb-4 border border-blue-600/30 text-[10px] md:text-xs font-bold">
@@ -78,7 +78,7 @@
 
                 <form action="{{ route('newsletter.store') }}" method="POST" class="relative group">
                     @csrf
-                    <input type="email" name="email" required placeholder="Email Address" class="w-full bg-gray-800 border-none rounded-2xl p-4 md:p-5 text-white focus:ring-2 focus:ring-blue-600 transition-all font-bold text-xs md:text-sm pr-16 md:pr-20">
+                    <input type="email" name="email" required placeholder="Alamat email" class="w-full bg-gray-800 border-none rounded-2xl p-4 md:p-5 text-white focus:ring-2 focus:ring-blue-600 transition-all font-bold text-xs md:text-sm pr-16 md:pr-20">
                     <button type="submit" class="absolute right-1.5 md:right-2 top-1.5 md:top-2 bottom-1.5 md:top-2 h-[calc(100%-12px)] md:h-[calc(100%-16px)] bg-blue-600 text-white px-4 md:px-6 rounded-xl hover:bg-blue-700 transition-colors shadow-lg shadow-blue-600/20">
                         <svg class="w-4 h-4 md:w-5 md:h-5" fill="none" stroke="currentColor" viewBox="0 0 24 24"><path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M14 5l7 7m0 0l-7 7m7-7H3"></path></svg>
                     </button>
@@ -88,11 +88,11 @@
 
         <div class="border-t border-white/5 pt-8 md:pt-12 flex flex-col md:flex-row justify-between items-center gap-6 md:gap-8">
             <p class="text-gray-500 font-medium text-[10px] md:text-sm text-center md:text-left">
-                &copy; {{ date('Y') }} <span class="text-white font-bold text-base md:text-lg">OVI<span class="text-blue-600"> PETSHOP</span></span>. All rights reserved.
+                &copy; {{ date('Y') }} <span class="text-white font-bold text-base md:text-lg">OVI<span class="text-blue-600"> PETSHOP</span></span>. Semua hak dilindungi.
             </p>
             <div class="flex gap-6 md:gap-8 text-gray-400 font-medium text-[10px] md:text-sm">
-                <a href="#" class="hover:text-blue-500 transition-colors">Privacy Policy</a>
-                <a href="#" class="hover:text-blue-500 transition-colors">Terms</a>
+                <a href="#" class="hover:text-blue-500 transition-colors">Kebijakan Privasi</a>
+                <a href="#" class="hover:text-blue-500 transition-colors">Ketentuan</a>
             </div>
         </div>
     </div>

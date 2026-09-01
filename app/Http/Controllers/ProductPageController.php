@@ -43,4 +43,22 @@ class ProductPageController extends Controller
 
         return view('pages.products.index', compact('products', 'categories', 'brands'));
     }
+
+    public function show(string $slug)
+    {
+        $product = Product::with(['category', 'brand'])
+            ->where('slug', $slug)
+            ->where('is_active', true)
+            ->firstOrFail();
+
+        $relatedProducts = Product::with(['category', 'brand'])
+            ->where('is_active', true)
+            ->where('id', '!=', $product->id)
+            ->when($product->category_id, fn ($query) => $query->where('category_id', $product->category_id))
+            ->latest()
+            ->take(3)
+            ->get();
+
+        return view('pages.products.show', compact('product', 'relatedProducts'));
+    }
 }
